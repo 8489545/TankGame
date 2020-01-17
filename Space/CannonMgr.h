@@ -1,10 +1,10 @@
 #pragma once
 enum class CANNON
 {
-	SPG, //ΐΪΑΦΖχ
-	FCANNON, //°νΑ¤Ζχ
-	TOW, //°ίΐΞΖχ
-	MTRAP, //ΗΨ»σΗΤΑ¤
+	SPG, //μμ£Όν¬
+	FCANNON, //κ³ μ •ν¬
+	TOW, //κ²¬μΈν¬
+	MTRAP, //ν•΄μƒν•¨μ •
 	NONE
 };
 class CannonMgr : public Object
