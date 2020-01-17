@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="FrameWork">
+      <UniqueIdentifier>{699be688-1f42-413e-918f-ff9cd384c2aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Mgrs">
+      <UniqueIdentifier>{a7d460a7-7158-41e3-a2b1-d7708785a5d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Node">
+      <UniqueIdentifier>{259cdba1-6ad0-419a-8063-8dbfebfda3fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{057d081e-6101-44c0-b497-a4727f75a69c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Mgrs">
+      <UniqueIdentifier>{709291cf-bc97-437a-9693-2aa1bb1d99be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object">
+      <UniqueIdentifier>{d7a655d4-ce8d-4275-9512-bbffd119e566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scenes">
+      <UniqueIdentifier>{8db021df-76df-4d74-879e-874affd19c3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{c6383b1b-ea00-4070-81fb-02225c69a219}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.cpp">
+      <Filter>FrameWork\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>FrameWork\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>FrameWork\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceMgr.cpp">
+      <Filter>FrameWork\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneDirector.cpp">
+      <Filter>FrameWork\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>FrameWork\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>FrameWork\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>FrameWork\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>FrameWork\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionMgr.cpp">
+      <Filter>Game\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectMgr.cpp">
+      <Filter>Game\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundMgr.cpp">
+      <Filter>Game\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="TextMgr.cpp">
+      <Filter>Game\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="Space.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>FrameWork\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="LineMgr.cpp">
+      <Filter>Game\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScene.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroScene.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelect.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Beak.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMgr.cpp">
+      <Filter>Game\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="CannonMgr.cpp">
+      <Filter>Game\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="SPG.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMgr.cpp">
+      <Filter>Game\Mgrs</Filter>
+    </ClCompile>
+    <ClCompile Include="CannonBall.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App.h">
+      <Filter>FrameWork\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>FrameWork\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>FrameWork\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceMgr.h">
+      <Filter>FrameWork\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneDirector.h">
+      <Filter>FrameWork\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>FrameWork\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>FrameWork\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>FrameWork\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>FrameWork\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>FrameWork\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionMgr.h">
+      <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectMgr.h">
+      <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundMgr.h">
+      <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="TextMgr.h">
+      <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>FrameWork\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="LineMgr.h">
+      <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroScene.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelect.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Beak.h">
+      <Filter>Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMgr.h">
+      <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonMgr.h">
+      <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMgr.h">
+      <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonBall.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SPG.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
