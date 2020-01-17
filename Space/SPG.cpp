@@ -119,8 +119,8 @@ void SPG::Shot()
 
 void SPG::BarrelAngleContorl()
 {
-	m_Barrel->m_Position.x = m_Position.x;
-	m_Barrel->m_Position.y = m_Position.y;
+	m_Barrel->m_Position.x = m_Position.x - 85 + cos(m_Rotation) * m_Size.x;
+	m_Barrel->m_Position.y = m_Position.y - 35;
 
 	if (INPUT->GetKey(VK_UP) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && m_Barrel->m_Rotation >= m_MaxRot)
 	{
