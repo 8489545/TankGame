@@ -93,7 +93,7 @@ void Camera::Render()
 	D3DXMatrixTranslation(&mTrans, -m_X, -m_Y, 1.f);
 	D3DXMatrixScaling(&mScale, m_sX, m_sY, 1.f);
 
-	// Ä«¸Ş¶ó Å¬·¡½º
+	// ì¹´ë©”ë¼ 
 	//mScale* mRot* mTrans
 	mWorld = mScale * mRot * mTrans;
 }
