@@ -29,6 +29,9 @@ SPG::SPG(Vec2 pos)
 	m_CorrectionValue = Vec2(50, -35);
 	m_Barrel->m_CenterPos.x = -70;
 
+	m_PrevDis = INT_MAX;
+	m_NearDis = INT_MAX;
+
 	INPUT->ButtonDown(false);
 }
 
@@ -159,21 +162,32 @@ void SPG::GroundCol(Object* other)
 {
 	m_isGround = true;
 	for (auto& iter : ObjMgr->m_Objects)
-	{
-		Vec2 NearPos1;
-		Vec2 NearPos2;
-
-		Vec2 PrevPos1 = Vec2(0,0);
-		Vec2 PrevPos2 = Vec2(0,0);
-
-		
+	{	
 
 		if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS)
 		{
+			Vec2 NearPos1;
+			Vec2 NearPos2;
+
+			float NowDis = DotToLineDistance(m_FrontFootPos->m_Position, iter->m_LinePos1, iter->m_LinePos2);
+
+			if (NowDis < m_PrevDis)
+			{
+				m_NearDis = NowDis;
+
+				NearPos1.x = iter->m_LinePos1.x;
+				NearPos1.y = iter->m_LinePos1.y;
+
+				NearPos2.x = iter->m_LinePos1.x;
+				NearPos2.y = iter->m_LinePos1.y;
+			}
+			m_PrevDis = NowDis;
+
+
 			RECT rc;
 			if (IntersectRect(&rc, &iter->m_Collision, &m_FrontFootPos->m_Collision))
 			{
-				if (DotToLineDistance(m_FrontFootPos->m_Position,iter->m_LinePos1,iter->m_LinePos2) >= 5 && iter->m_SlopeRot != 0)
+				if (m_NearDis >= 5 && iter->m_SlopeRot != 0)
 				{
 					m_Rotation -= D3DXToRadian(1);
 				}
