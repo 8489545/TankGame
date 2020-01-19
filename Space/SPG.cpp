@@ -163,7 +163,7 @@ void SPG::GroundCol(Object* other)
 		if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS)
 		{
 			RECT rc;
-			if (IntersectRect(&rc, &iter->m_Collision, &m_FrontFootPos->m_Collision) && iter->m_SlopeRot != 0)
+			if (IntersectRect(&rc, &iter->m_Collision, &m_FrontFootPos->m_Collision))
 			{
 
 				float a = iter->m_LinePos1.y - iter->m_LinePos2.y;
@@ -178,6 +178,9 @@ void SPG::GroundCol(Object* other)
 					m_Rotation -= D3DXToRadian(1);
 				}
 			}
+
+
+
 		}
 		if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS)
 		{
@@ -193,8 +196,8 @@ void SPG::SetFootPos()
 	m_BackFootPos->m_Position.x = m_Position.x + (-m_Size.x / 2) * cos(m_Rotation) - (m_Size.y / 2) * sin(m_Rotation);
 	m_BackFootPos->m_Position.y = m_Position.y + (-m_Size.x / 2) * sin(m_Rotation) + (m_Size.y / 2) * cos(m_Rotation);
 
-	m_MidPos.x = (m_FrontFootPos->m_Position.x - m_BackFootPos->m_Position.x) / 2;
-	m_MidPos.y = (m_FrontFootPos->m_Position.y - m_BackFootPos->m_Position.y) / 2;
+	m_MidPos.x = m_Position.x + cos(m_Rotation);
+	m_MidPos.y = m_Position.y + 45 + sin(m_Rotation);
 }
 
 void SPG::CheakMove()

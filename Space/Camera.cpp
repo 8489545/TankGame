@@ -51,7 +51,7 @@ void Camera::Translate()
 
 void Camera::Follow(Object* obj)
 {
-	if (obj != nullptr && !m_MovingMode)
+	if (obj != nullptr && !m_MovingMode && (obj->m_Position.x != 0 && obj->m_Position.y != 0))
 	{
 		m_X = obj->m_Position.x - App::GetInst()->m_Width / 2;
 		m_Y = obj->m_Position.y - App::GetInst()->m_Height / 2;
