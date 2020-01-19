@@ -160,20 +160,20 @@ void SPG::GroundCol(Object* other)
 	m_isGround = true;
 	for (auto& iter : ObjMgr->m_Objects)
 	{
+		Vec2 NearPos1;
+		Vec2 NearPos2;
+
+		Vec2 PrevPos1 = Vec2(0,0);
+		Vec2 PrevPos2 = Vec2(0,0);
+
+		
+
 		if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS)
 		{
 			RECT rc;
 			if (IntersectRect(&rc, &iter->m_Collision, &m_FrontFootPos->m_Collision))
 			{
-
-				float a = iter->m_LinePos1.y - iter->m_LinePos2.y;
-				float b = iter->m_LinePos2.x - iter->m_LinePos1.x;
-				float c = (iter->m_LinePos1.x * iter->m_LinePos2.y) - (iter->m_LinePos2.x * iter->m_LinePos1.y);
-
-				float dis;
-				dis = abs(a * m_FrontFootPos->m_Position.x + b * m_FrontFootPos->m_Position.y + c) / sqrt(pow(a, 2) + pow(b, 2));
-
-				if (dis >= 5)
+				if (DotToLineDistance(m_FrontFootPos->m_Position,iter->m_LinePos1,iter->m_LinePos2) >= 5 && iter->m_SlopeRot != 0)
 				{
 					m_Rotation -= D3DXToRadian(1);
 				}
@@ -206,4 +206,14 @@ void SPG::CheakMove()
 		m_isMove = true;
 	else
 		m_isMove = false;
+}
+
+float SPG::DotToLineDistance(Vec2 Dot, Vec2 Line1, Vec2 Line2)
+{
+	float a = Line1.y - Line2.y;
+	float b = Line2.x - Line1.x;
+	float c = (Line1.x * Line2.y) - (Line2.x * Line1.y);
+
+	float dis;
+	return dis = abs(a * Dot.x + b * Dot.y + c) / sqrt(pow(a, 2) + pow(b, 2));
 }

@@ -42,6 +42,6 @@ public:
 	void GroundCol(Object* other);
 	void SetFootPos();
 	void CheakMove();
-	void SetRayPos();
+	float DotToLineDistance(Vec2 Dot, Vec2 Line1, Vec2 Line2);
 };
 
