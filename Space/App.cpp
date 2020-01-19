@@ -34,8 +34,6 @@ void App::Run()
 
 	while (msg.message != WM_QUIT)
 	{
-		static DWORD frameCount = 0;
-		static float timeElapsed = 0.0f;
 		static DWORD lastTime = timeGetTime();
 
 		DWORD curTime = timeGetTime();
@@ -48,6 +46,7 @@ void App::Run()
 		}
 		else
 		{
+			printf("%f %f\n", timeDelta, Time);
 			Renderer::GetInst()->Begin();
 			SceneDirector::GetInst()->Update(timeDelta, Time);
 			DeltaTime = timeDelta;

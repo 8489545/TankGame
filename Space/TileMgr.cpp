@@ -55,7 +55,7 @@ void TileMgr::DrawMap(int mapdata[],int mapsize)
 		{
 			if (mapdata[i] > 0)
 			{
-				Tile->m_SlopeRot = -31.5f - floor(-31.5f / 360.f) * 360.f;
+				Tile->m_SlopeRot = -31.5f;
 				Tile->m_LinePos1.y += 183.f;
 			}
 			else

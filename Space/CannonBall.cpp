@@ -10,7 +10,7 @@ CannonBall::CannonBall(float power, float rot, Vec2 Pos)
 	m_Power = power / 2 + 5;
 	m_Rotation = rot;
 	m_StartingRotation = rot;
-	GR = 0.4f;
+	GR = 0.2f;
 	t = 0;
 }
 
@@ -69,7 +69,6 @@ void CannonBall::SetVertex()
 
 	Vertex3.x = m_Position.x + ((-m_Size.x - 15) / 2) * cos(m_Rotation) - ((-m_Size.y - 15) / 2) * sin(m_Rotation);
 	Vertex3.y = m_Position.y + ((-m_Size.x - 15) / 2) * sin(m_Rotation) + ((-m_Size.y - 15) / 2) * cos(m_Rotation);
-
 
 	Vertex4.x = m_Position.x + ((m_Size.x - 15) / 2) * cos(m_Rotation) - ((-m_Size.y - 15) / 2) * sin(m_Rotation);
 	Vertex4.y = m_Position.y + ((m_Size.x - 15) / 2) * sin(m_Rotation) + ((-m_Size.y - 15) / 2) * cos(m_Rotation);

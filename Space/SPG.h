@@ -5,6 +5,7 @@ class SPG : public Object
 	Sprite* m_Barrel;
 	Sprite* m_FrontFootPos;
 	Sprite* m_BackFootPos;
+	Sprite* m_Col;
 	TextMgr* m_Text;
 	LineMgr* line;
 
@@ -28,6 +29,7 @@ public:
 	Vec2 A, B, C;
 	Vec2 m_BarrelEnd;
 	Vec2 m_PrevPos;
+	Vec2 m_MidPos;
 
 	void Update(float deltaTime,float Time);
 	void Render();
@@ -40,5 +42,6 @@ public:
 	void GroundCol(Object* other);
 	void SetFootPos();
 	void CheakMove();
+	void SetRayPos();
 };
 

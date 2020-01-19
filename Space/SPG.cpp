@@ -15,6 +15,7 @@ SPG::SPG(Vec2 pos)
 
 	m_FrontFootPos = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
 	m_BackFootPos = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
+	m_Col = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
 
 	m_isGround = false;
 	m_Speed = 300.f;
@@ -49,6 +50,9 @@ void SPG::Update(float deltaTime, float Time)
 	m_isGround = false;
 	m_PrevRotation = m_Rotation;
 	m_PrevPos = m_Position;
+
+	m_Col->m_Position = m_MidPos;
+
 	m_SPG->Update(deltaTime, Time);
 }
 
@@ -58,6 +62,7 @@ void SPG::Render()
 	m_Barrel->Render();
 	m_FrontFootPos->Render();
 	m_BackFootPos->Render();
+	m_Col->Render();
 
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y), 0, 0);
@@ -67,7 +72,9 @@ void SPG::Render()
 void SPG::OnCollision(Object* other)
 {
 	if (other->m_Tag == "Tile")
+	{
 		GroundCol(other);
+	}
 }
 
 void SPG::Move()
@@ -143,7 +150,6 @@ void SPG::Gravity()
 	if (!m_isGround)
 	{
 		m_Position.y += vy;
-		m_Barrel->m_Position.y += vy;
 	}
 	else
 		vy = 0;
@@ -151,116 +157,30 @@ void SPG::Gravity()
 
 void SPG::GroundCol(Object* other)
 {
-
-	printf("F %f B %f\n", m_FrontRot, m_BackRot);
-
 	m_isGround = true;
-	if (m_isMove)
+	for (auto& iter : ObjMgr->m_Objects)
 	{
-		for (auto& iter : ObjMgr->m_Objects)
+		if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS)
 		{
-			if (iter->m_Tag == "Tile")
+			RECT rc;
+			if (IntersectRect(&rc, &iter->m_Collision, &m_FrontFootPos->m_Collision) && iter->m_SlopeRot != 0)
 			{
-				RECT rc;
-				if (IntersectRect(&rc, &m_FrontFootPos->m_Collision, &iter->m_Collision))
-				{
-					m_FrontRot = iter->m_SlopeRot;
-				}
-			}
-			else
-				m_FrontRot;
-		}
 
-		for (auto& iter : ObjMgr->m_Objects)
-		{
-			if (iter->m_Tag == "Tile")
-			{
-				RECT rc;
-				if (IntersectRect(&rc, &m_BackFootPos->m_Collision, &iter->m_Collision))
-				{
-					m_BackRot = iter->m_SlopeRot;
-				}
-			}
-			else
-				m_BackRot;
-		}
+				float a = iter->m_LinePos1.y - iter->m_LinePos2.y;
+				float b = iter->m_LinePos2.x - iter->m_LinePos1.x;
+				float c = (iter->m_LinePos1.x * iter->m_LinePos2.y) - (iter->m_LinePos2.x * iter->m_LinePos1.y);
 
-		if (m_FrontRot == m_BackRot)
-		{
-			m_Rotation = D3DXToRadian(m_FrontRot);
-		}
-		else
-		{
-			if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS)
-			{
-				if (m_FrontRot > m_BackRot && m_FrontRot > 90)
+				float dis;
+				dis = abs(a * m_FrontFootPos->m_Position.x + b * m_FrontFootPos->m_Position.y + c) / sqrt(pow(a, 2) + pow(b, 2));
+
+				if (dis >= 5)
 				{
-					m_Barrel->m_Rotation -= D3DXToRadian(1);
 					m_Rotation -= D3DXToRadian(1);
-
-					m_MinRot -= D3DXToRadian(1);
-					m_MaxRot -= D3DXToRadian(1);
-				}
-				else if(m_FrontRot > m_BackRot&& m_FrontRot < 90)
-				{
-					m_Barrel->m_Rotation += D3DXToRadian(0.5f);
-					m_Rotation += D3DXToRadian(0.5f);
-
-					m_MinRot += D3DXToRadian(0.5f);
-					m_MaxRot += D3DXToRadian(0.5f);
-				}
-				else if (m_FrontRot < m_BackRot && m_BackRot > 90 )
-				{
-					m_Barrel->m_Rotation += D3DXToRadian(0.5f);
-					m_Rotation += D3DXToRadian(0.5f);
-
-					m_MinRot += D3DXToRadian(0.5f);
-					m_MaxRot += D3DXToRadian(0.5f);
-				}
-				else if (m_FrontRot < m_BackRot && m_BackRot < 90)
-				{
-					m_Barrel->m_Rotation -= D3DXToRadian(1);
-					m_Rotation -= D3DXToRadian(1);
-
-					m_MinRot -= D3DXToRadian(1);
-					m_MaxRot -= D3DXToRadian(1);
 				}
 			}
-			if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS)
-			{
-				if (m_FrontRot > m_BackRot && m_FrontRot > 90)
-				{
-					m_Barrel->m_Rotation += D3DXToRadian(1);
-					m_Rotation += D3DXToRadian(1);
-
-					m_MinRot += D3DXToRadian(1);
-					m_MaxRot += D3DXToRadian(1);
-				}
-				else if (m_FrontRot > m_BackRot && m_FrontRot < 90)
-				{
-					m_Barrel->m_Rotation -= D3DXToRadian(0.5f);
-					m_Rotation -= D3DXToRadian(0.5f);
-
-					m_MinRot -= D3DXToRadian(0.5f);
-					m_MaxRot -= D3DXToRadian(0.5f);
-				}
-				else if (m_FrontRot < m_BackRot && m_BackRot > 90)
-				{
-					m_Barrel->m_Rotation -= D3DXToRadian(0.5f);
-					m_Rotation -= D3DXToRadian(0.5f);
-
-					m_MinRot -= D3DXToRadian(0.5f);
-					m_MaxRot -= D3DXToRadian(0.5f);
-				}
-				else if (m_FrontRot < m_BackRot && m_BackRot < 90)
-				{
-					m_Barrel->m_Rotation += D3DXToRadian(1);
-					m_Rotation += D3DXToRadian(1);
-
-					m_MinRot += D3DXToRadian(1);
-					m_MaxRot += D3DXToRadian(1);
-				}
-			}
+		}
+		if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS)
+		{
 		}
 	}
 }
@@ -272,6 +192,9 @@ void SPG::SetFootPos()
 
 	m_BackFootPos->m_Position.x = m_Position.x + (-m_Size.x / 2) * cos(m_Rotation) - (m_Size.y / 2) * sin(m_Rotation);
 	m_BackFootPos->m_Position.y = m_Position.y + (-m_Size.x / 2) * sin(m_Rotation) + (m_Size.y / 2) * cos(m_Rotation);
+
+	m_MidPos.x = (m_FrontFootPos->m_Position.x - m_BackFootPos->m_Position.x) / 2;
+	m_MidPos.y = (m_FrontFootPos->m_Position.y - m_BackFootPos->m_Position.y) / 2;
 }
 
 void SPG::CheakMove()
