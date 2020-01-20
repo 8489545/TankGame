@@ -108,6 +108,9 @@
     <ClCompile Include="CannonBall.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="EffectMgr.cpp">
+      <Filter>Game\Mgrs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="SPG.h">
       <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectMgr.h">
+      <Filter>Game\Mgrs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

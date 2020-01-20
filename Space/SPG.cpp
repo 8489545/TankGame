@@ -126,7 +126,6 @@ void SPG::Shot()
 
 void SPG::BarrelAngleContorl()
 {
-	printf("%f %f\n",D3DXToDegree(m_MaxRot), D3DXToDegree(m_Barrel->m_Rotation));
 	m_Barrel->m_Position.x = m_Position.x - 85 + cos(m_Rotation) * m_Size.x;
 	m_Barrel->m_Position.y = m_Position.y - 35;
 
