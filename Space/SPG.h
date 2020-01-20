@@ -25,8 +25,6 @@ public:
 	float m_MinRot;
 	float m_FrontRot;
 	float m_BackRot;
-	float m_PrevDis;
-	float m_NearDis;
 
 	Vec2 A, B, C;
 	Vec2 m_BarrelEnd;

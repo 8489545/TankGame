@@ -29,9 +29,6 @@ SPG::SPG(Vec2 pos)
 	m_CorrectionValue = Vec2(50, -35);
 	m_Barrel->m_CenterPos.x = -70;
 
-	m_PrevDis = INT_MAX;
-	m_NearDis = INT_MAX;
-
 	INPUT->ButtonDown(false);
 }
 
@@ -161,43 +158,49 @@ void SPG::Gravity()
 void SPG::GroundCol(Object* other)
 {
 	m_isGround = true;
-	for (auto& iter : ObjMgr->m_Objects)
-	{	
-
-		if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS)
+	if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS && INPUT->GetKey(VK_LEFT) != KeyState::PRESS)
+	{
+		Object* obj = nullptr;
+		RECT rc;
+		for (auto& iter : ObjMgr->m_Objects)
 		{
-			Vec2 NearPos1;
-			Vec2 NearPos2;
-
-			float NowDis = DotToLineDistance(m_FrontFootPos->m_Position, iter->m_LinePos1, iter->m_LinePos2);
-
-			if (NowDis < m_PrevDis)
+			if(IntersectRect(&rc, &iter->m_Collision, &m_FrontFootPos->m_Collision))
 			{
-				m_NearDis = NowDis;
-
-				NearPos1.x = iter->m_LinePos1.x;
-				NearPos1.y = iter->m_LinePos1.y;
-
-				NearPos2.x = iter->m_LinePos1.x;
-				NearPos2.y = iter->m_LinePos1.y;
+				obj = iter;
 			}
-			m_PrevDis = NowDis;
+		}
 
-
-			RECT rc;
-			if (IntersectRect(&rc, &iter->m_Collision, &m_FrontFootPos->m_Collision))
+		if (obj != nullptr)
+		{
+			float NowDis = DotToLineDistance(m_FrontFootPos->m_Position, obj->m_LinePos1, obj->m_LinePos2);
+			if (IntersectRect(&rc, &obj->m_Collision, &m_FrontFootPos->m_Collision))
 			{
-				if (m_NearDis >= 5 && iter->m_SlopeRot != 0)
+				if (NowDis >= 5 && obj->m_SlopeRot < 0)
 				{
 					m_Rotation -= D3DXToRadian(1);
 				}
+				else if (NowDis >= 5 && obj->m_SlopeRot > 0)
+				{
+					m_Rotation += D3DXToRadian(1);
+				}
+				else if (NowDis >= 5 && obj->m_SlopeRot == 0)
+				{
+					m_Rotation -= D3DXToRadian(1);
+
+					if (abs(m_Rotation) < 0.1f)
+						m_Rotation = 0;
+				}
 			}
-
-
-
 		}
-		if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS)
+		else
 		{
+			if (m_Rotation < 0)
+				m_Rotation += D3DXToRadian(1);
+
+			if (abs(m_Rotation) < 0.1f)
+				m_Rotation = 0;
+			
+			printf("%f\n", abs(m_Rotation));
 		}
 	}
 }
