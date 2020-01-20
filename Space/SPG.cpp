@@ -178,10 +178,16 @@ void SPG::GroundCol(Object* other)
 				if (NowDis >= 5 && obj->m_SlopeRot < 0)
 				{
 					m_Rotation -= D3DXToRadian(1);
+
+					if (m_Rotation - D3DXToRadian(obj->m_SlopeRot) < 0.1f)
+						m_Rotation = D3DXToRadian(obj->m_SlopeRot);
 				}
 				else if (NowDis >= 5 && obj->m_SlopeRot > 0)
 				{
 					m_Rotation += D3DXToRadian(1);
+
+					if (abs(m_Rotation - D3DXToRadian(obj->m_SlopeRot)) < 0.1f)
+						m_Rotation = D3DXToRadian(obj->m_SlopeRot);
 				}
 				else if (NowDis >= 5 && obj->m_SlopeRot == 0)
 				{
@@ -199,8 +205,6 @@ void SPG::GroundCol(Object* other)
 
 			if (abs(m_Rotation) < 0.1f)
 				m_Rotation = 0;
-			
-			printf("%f\n", abs(m_Rotation));
 		}
 	}
 }
