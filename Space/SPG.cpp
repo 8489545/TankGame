@@ -126,14 +126,24 @@ void SPG::Shot()
 
 void SPG::BarrelAngleContorl()
 {
+	printf("%f %f\n",D3DXToDegree(m_MaxRot), D3DXToDegree(m_Barrel->m_Rotation));
 	m_Barrel->m_Position.x = m_Position.x - 85 + cos(m_Rotation) * m_Size.x;
 	m_Barrel->m_Position.y = m_Position.y - 35;
 
-	if (INPUT->GetKey(VK_UP) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && m_Barrel->m_Rotation >= m_MaxRot)
+	m_MaxRot = m_Rotation;
+	m_MinRot = m_Rotation + D3DXToRadian(-90);
+
+	if (m_Barrel->m_Rotation > m_MaxRot)
+		m_Barrel->m_Rotation = m_MaxRot;
+
+	if (m_Barrel->m_Rotation < m_MinRot)
+		m_Barrel->m_Rotation = m_MinRot;
+
+	if (INPUT->GetKey(VK_UP) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode)
 	{
 		m_Barrel->m_Rotation -= D3DXToRadian(1);
 	}
-	if (INPUT->GetKey(VK_DOWN) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && m_Barrel->m_Rotation <= m_MinRot)
+	if (INPUT->GetKey(VK_DOWN) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode)
 	{
 		m_Barrel->m_Rotation += D3DXToRadian(1);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	}
@@ -202,6 +212,56 @@ void SPG::GroundCol(Object* other)
 		{
 			if (m_Rotation < 0)
 				m_Rotation += D3DXToRadian(1);
+
+			if (abs(m_Rotation) < 0.1f)
+				m_Rotation = 0;
+		}
+	}
+
+	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS && INPUT->GetKey(VK_RIGHT) != KeyState::PRESS)
+	{
+		Object* obj = nullptr;
+		RECT rc;
+		for (auto& iter : ObjMgr->m_Objects)
+		{
+			if (IntersectRect(&rc, &iter->m_Collision, &m_BackFootPos->m_Collision))
+			{
+				obj = iter;
+			}
+		}
+
+		if (obj != nullptr)
+		{
+			float NowDis = DotToLineDistance(m_BackFootPos->m_Position, obj->m_LinePos1, obj->m_LinePos2);
+			if (IntersectRect(&rc, &obj->m_Collision, &m_BackFootPos->m_Collision))
+			{
+				if (NowDis >= 5 && obj->m_SlopeRot < 0)
+				{
+					m_Rotation -= D3DXToRadian(1);
+
+					if (m_Rotation - D3DXToRadian(obj->m_SlopeRot) < 0.1f)
+						m_Rotation = D3DXToRadian(obj->m_SlopeRot);
+				}
+				else if (NowDis >= 5 && obj->m_SlopeRot > 0)
+				{
+					m_Rotation += D3DXToRadian(1);
+
+					if (abs(m_Rotation - D3DXToRadian(obj->m_SlopeRot)) < 0.1f)
+						m_Rotation = D3DXToRadian(obj->m_SlopeRot);
+				}
+				else if (NowDis >= 5 && obj->m_SlopeRot == 0)
+				{
+					m_Rotation += D3DXToRadian(1);
+
+					if (abs(m_Rotation) < 0.1f)
+						m_Rotation = 0;
+				}
+			}
+		}
+		else
+		{
+			if (m_Rotation > 0)
+				m_Rotation -= D3DXToRadian(1);
 
 			if (abs(m_Rotation) < 0.1f)
 				m_Rotation = 0;
