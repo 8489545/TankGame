@@ -40,7 +40,7 @@ SPG::~SPG()
 
 void SPG::Update(float deltaTime, float Time)
 {
-	//Camera::GetInst()->Follow(this);
+
 	ObjMgr->CollisionCheak(this, "Tile");
 	Gravity();
 	Move();
@@ -86,9 +86,6 @@ void SPG::Move()
 
 	D3DXVec2Normalize(&C, &B);
 
-	if (INPUT->GetKey(VK_SPACE) == KeyState::PRESS)
-		int i = 0;
-
 	if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0)
 	{
 		Translate(C.x * m_Speed * dt, -C.y * m_Speed * dt);
@@ -111,6 +108,11 @@ void SPG::Shot()
 			m_isLaunching = false;
 		}
 		Player::GetInst()->m_Power++;
+		Camera::GetInst()->Follow(this);
+	}
+	if (INPUT->GetKey(VK_SPACE) == KeyState::UP)
+	{
+		Camera::GetInst()->Follow(nullptr);
 	}
 	if (INPUT->GetKey(VK_SPACE) == KeyState::UP)
 		m_isLaunching = true;
