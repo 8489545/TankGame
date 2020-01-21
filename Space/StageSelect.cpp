@@ -106,8 +106,7 @@ void StageSelect::Update(float deltaTime, float Time)
 
 	if (CollisionMgr::GetInst()->MouseWithBoxSize(m_Start) && INPUT->GetButtonDown())
 	{
-		ObjMgr->AddObject(new CannonMgr(), "Mgr");
-		//SceneDirector::GetInst()->ChangeScene(new CannonMgr());`
+		SceneDirector::GetInst()->ChangeScene(new CannonMgr());
 		INPUT->ButtonDown(false);
 	}
 

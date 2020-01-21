@@ -16,6 +16,10 @@ void Camera::Init()
 	m_Y = 0;
 	m_sX = 1.f;
 	m_sY = 1.f;
+	m_MaxX = 0;
+	m_MinX = 0;
+	m_MaxY = 0;
+	m_MinY = 0;
 	m_MovingMode = false;
 }
 
@@ -53,8 +57,10 @@ void Camera::Follow(Object* obj)
 {
 	if (obj != nullptr && !m_MovingMode && (obj->m_Position.x != 0 && obj->m_Position.y != 0))
 	{
-		m_X = obj->m_Position.x - App::GetInst()->m_Width / 2;
-		m_Y = obj->m_Position.y - App::GetInst()->m_Height / 2;
+		if(obj->m_Position.x - App::GetInst()->m_Width / 2 < m_MaxX && obj->m_Position.x - App::GetInst()->m_Width / 2 > m_MinX)
+			m_X = obj->m_Position.x - App::GetInst()->m_Width / 2;
+		if(obj->m_Position.y - App::GetInst()->m_Height / 2 < m_MaxY && obj->m_Position.y - App::GetInst()->m_Height / 2 > m_MinY)
+			m_Y = obj->m_Position.y - App::GetInst()->m_Height / 2;
 	}
 }
 
@@ -80,11 +86,24 @@ void Camera::Zoom()
 
 void Camera::Update(float deltaTime, float time)
 {
+	printf("%f %f\n", m_X, m_Y);
 	Translate();
-	Zoom();
+	//Zoom();
 
 	if (m_Rotation >= 360)
 		m_Rotation = 0;
+
+	if (m_X > m_MaxX)
+		m_X = m_MaxX;
+
+	if (m_Y > m_MaxY)
+		m_Y = m_MaxY;
+
+	if (m_X < m_MinX)
+		m_X = m_MinX;
+
+	if (m_Y < m_MinY)
+		m_Y = m_MinY;
 }
 
 void Camera::Render()

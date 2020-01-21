@@ -17,8 +17,10 @@ public:
 	float m_X, m_Y;
 	float m_sX, m_sY;
 	float m_Timer;
-
 	bool m_MovingMode;
+
+	float m_MaxX, m_MaxY;
+	float m_MinX, m_MinY;
 
 
 	Matrix GetWorld()

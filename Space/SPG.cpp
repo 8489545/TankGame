@@ -40,7 +40,7 @@ SPG::~SPG()
 
 void SPG::Update(float deltaTime, float Time)
 {
-	Camera::GetInst()->Follow(this);
+	//Camera::GetInst()->Follow(this);
 	ObjMgr->CollisionCheak(this, "Tile");
 	Gravity();
 	Move();
