@@ -8,6 +8,10 @@ EffectMgr::EffectMgr(std::wstring filename,  int start, int end ,Vec2 Pos)
 	Effect->Init(7, true);
 	Effect->SetParent(this);
 	Effect->m_Position = Pos;
+
+
+	Start = start;
+	End = end;
 }
 
 EffectMgr::~EffectMgr()
@@ -16,10 +20,16 @@ EffectMgr::~EffectMgr()
 
 void EffectMgr::Update(float deltaTime, float time)
 {
+	if (Effect->m_CurrentFrame >= End - 1)
+	{
+		ObjMgr->RemoveObject(this);
+	}
+	Effect->Update(deltaTime, time);
 }
 
 void EffectMgr::Render()
 {
+	Effect->Render();
 }
 
 void EffectMgr::OnCollision(Object* other)

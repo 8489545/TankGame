@@ -15,7 +15,9 @@ SPG::SPG(Vec2 pos)
 
 	m_FrontFootPos = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
 	m_BackFootPos = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
-	m_Col = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
+
+	m_FrontFootPos->m_Visible = false;
+	m_BackFootPos->m_Visible = false;
 
 	m_isGround = false;
 	m_Speed = 300.f;
@@ -51,8 +53,6 @@ void SPG::Update(float deltaTime, float Time)
 	m_PrevRotation = m_Rotation;
 	m_PrevPos = m_Position;
 
-	m_Col->m_Position = m_MidPos;
-
 	m_SPG->Update(deltaTime, Time);
 }
 
@@ -62,7 +62,6 @@ void SPG::Render()
 	m_Barrel->Render();
 	m_FrontFootPos->Render();
 	m_BackFootPos->Render();
-	m_Col->Render();
 
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y), 0, 0);
@@ -275,9 +274,6 @@ void SPG::SetFootPos()
 
 	m_BackFootPos->m_Position.x = m_Position.x + (-m_Size.x / 2) * cos(m_Rotation) - (m_Size.y / 2) * sin(m_Rotation);
 	m_BackFootPos->m_Position.y = m_Position.y + (-m_Size.x / 2) * sin(m_Rotation) + (m_Size.y / 2) * cos(m_Rotation);
-
-	m_MidPos.x = m_Position.x + cos(m_Rotation);
-	m_MidPos.y = m_Position.y + 45 + sin(m_Rotation);
 }
 
 void SPG::CheakMove()

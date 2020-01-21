@@ -40,11 +40,11 @@ void CannonBall::Render()
 
 void CannonBall::OnCollision(Object* other)
 {
-	printf("%f", other->m_SlopeRot);
 	if (other->m_Tag == "Tile")
 	{
 		if (CollisionMgr::GetInst()->LineToLineCollide(Vertex1, Vertex2, other->m_LinePos1, other->m_LinePos2))
 		{
+			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position),"Effect");
 			SetDestroy(true);
 		}
 	}

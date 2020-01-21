@@ -54,6 +54,10 @@ void Animation::Init(int delay, bool play)
 
 void Animation::Update(float deltaTime,float time)
 {
+	if (m_Destroy)
+	{
+		m_Anim.at(m_CurrentFrame)->SetDestroy(true);
+	}
 	m_FrameCount++;
 
 	if (m_AutoPlay == true)

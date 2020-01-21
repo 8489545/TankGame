@@ -43,6 +43,7 @@ inline void SafeDelete(T*& x);
 #include"CannonMgr.h"
 #include"GameMgr.h"
 #include"TileMgr.h"
+#include"EffectMgr.h"
 #include"Player.h"
 
 //

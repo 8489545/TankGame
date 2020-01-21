@@ -6,6 +6,8 @@ public:
 	EffectMgr(std::wstring filename,int start,int end,Vec2 Pos);
 	~EffectMgr();
 
+	int Start;
+	int End;
 
 	void Update(float deltaTime, float time);
 	void Render();
