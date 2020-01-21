@@ -31,6 +31,9 @@ void CannonBall::Update(float deltaTime, float time)
 
 	SetRotation();
 	SetVertex();
+
+	if (m_Position.x >= Camera::GetInst()->m_MaxX + 1920)
+		SetDestroy(true);
 }
 
 void CannonBall::Render()

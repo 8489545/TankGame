@@ -20,7 +20,7 @@ SPG::SPG(Vec2 pos)
 	m_BackFootPos->m_Visible = false;
 
 	m_isGround = false;
-	m_Speed = 300.f;
+	m_Speed = 300;
 
 	m_Text = new TextMgr();
 	m_Text->Init(32, true, false, "Arial");
