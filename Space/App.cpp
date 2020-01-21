@@ -47,6 +47,7 @@ void App::Run()
 		else
 		{
 			printf("%f %f\n", timeDelta, Time);
+			printf("%f %f\n", INPUT->GetMousePos().x, INPUT->GetMousePos().y);
 			Renderer::GetInst()->Begin();
 			SceneDirector::GetInst()->Update(timeDelta, Time);
 			DeltaTime = timeDelta;

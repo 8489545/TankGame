@@ -25,7 +25,7 @@ CannonMgr::CannonMgr()
 
 	m_GameStart = Sprite::Create(L"Painting/UI/GameStart.png");
 	m_GameStart->SetParent(this);
-	m_GameStart->SetPosition(1920 / 2,838);
+	m_GameStart->SetPosition(1920 / 2,910);
 	
 	m_CannonNum = 0;
 }
