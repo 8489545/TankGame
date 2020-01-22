@@ -11,7 +11,7 @@ INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 
 #endif
 	App::GetInst()->Init(1920, 1080, 1);
-	SceneDirector::GetInst()->ChangeScene(new StageSelect());
+	SceneDirector::GetInst()->ChangeScene(new MainScene());
 	App::GetInst()->Run();
 	return 0;
 }

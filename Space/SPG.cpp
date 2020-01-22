@@ -194,7 +194,7 @@ void SPG::GroundCol(Object* other)
 				}
 				else if (NowDis >= 5 && obj->m_SlopeRot > 0)
 				{
-					m_Rotation += D3DXToRadian(1);
+					m_Rotation += D3DXToRadian(0.3);
 
 					if (abs(m_Rotation - D3DXToRadian(obj->m_SlopeRot)) < 0.1f)
 						m_Rotation = D3DXToRadian(obj->m_SlopeRot);

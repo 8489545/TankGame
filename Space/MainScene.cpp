@@ -48,12 +48,6 @@ MainScene::MainScene()
 	m_Title5->SetPosition(1520 - m_Title1->m_Size.x, -1300);
 
 
-	m_Boom = new Animation();
-
-	m_Boom->AddContinueFrame(L"Painting/Effect/Boom", 5, 5);
-	m_Boom->Init(10, true);
-	m_Boom->SetPosition(389, 484);
-
 	Term = 0.5f;
 
 }
@@ -74,9 +68,6 @@ void MainScene::Update(float deltaTime, float time)
 	{
 		Term -= deltaTime;
 
-		if(Term <= 0 && m_Cannon->m_Position.x == 200)
-			m_Boom->Init(10, false);
-
 		if (m_StartButton->m_Position.x > 1575)
 			m_StartButton->m_Position.x -= 1500 * deltaTime;
 
@@ -96,7 +87,6 @@ void MainScene::Update(float deltaTime, float time)
 	}
 	if (SceneChange)
 	{
-		printf("sadf : %f\n", m_Door1->m_Position.y);
 		if (m_Door1->m_Position.y <= 250)
 		{
 			m_Door1->m_Position.y += 1200 * deltaTime;
@@ -123,8 +113,6 @@ void MainScene::Render()
 	if (m_Title5->m_Position.y == 200.f)
 	{
 		m_Cannon->Render();
-		if(m_Cannon->m_Position.x == 200)
-			m_Boom->Render();
 
 		m_StartButton->Render();
 	}
