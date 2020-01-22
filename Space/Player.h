@@ -13,6 +13,8 @@ public:
 	Sprite* m_MinRot;
 	Sprite* m_MaxRot;
 
+	TextMgr* m_RotationText;
+
 	Player();
 	~Player();
 

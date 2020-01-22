@@ -49,7 +49,7 @@ int TextMgr::print(const std::string& str, int x, int y)
 	Vec2 rCenter = Vec2((float)x,(float)y);
 	D3DXMatrixTransformation2D(&m_wMat, NULL, 0.0f, NULL, &rCenter, m_Angle, NULL);
 	Renderer::GetInst()->GetSprite()->SetTransform(&m_wMat);
-	return m_pFont->DrawTextA(Renderer::GetInst()->GetSprite(),str.c_str(),-1,&m_FontRect,DT_LEFT,m_Color);
+	return m_pFont->DrawTextA(Renderer::GetInst()->GetSprite(),str.c_str(),-1,&m_FontRect,DT_TOP,m_Color);
 }
 
 void TextMgr::SetColor(int a, int r, int g, int b)

@@ -22,9 +22,6 @@ SPG::SPG(Vec2 pos)
 	m_isGround = false;
 	m_Speed = 300;
 
-	m_Text = new TextMgr();
-	m_Text->Init(32, true, false, "Arial");
-
 	m_MaxRot = D3DXToRadian(-90);
 	m_MinRot = 0;
 
@@ -62,10 +59,6 @@ void SPG::Render()
 	m_Barrel->Render();
 	m_FrontFootPos->Render();
 	m_BackFootPos->Render();
-
-	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
-	m_Text->print(std::to_string(INPUT->GetMousePos().x) + "  " + std::to_string(INPUT->GetMousePos().y), 0, 0);
-	Renderer::GetInst()->GetSprite()->End();
 }
 
 void SPG::OnCollision(Object* other)

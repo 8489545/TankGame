@@ -4,7 +4,7 @@
 Player::Player()
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {
 	m_MainPanel = Sprite::Create(L"Painting/UI/MainPanel.png");
-	m_MainPanel->SetPosition(1920 / 2, 970);
+	m_MainPanel->SetPosition(1920 / 2, 939);
 
 	ObjMgr->AddObject(m_MainPanel, "UI");
 
@@ -32,6 +32,10 @@ Player::Player()
 	ObjMgr->AddObject(m_BarrelRot, "UI");
 	ObjMgr->AddObject(m_MaxRot, "UI");
 	ObjMgr->AddObject(m_MinRot, "UI");
+
+	m_RotationText = new TextMgr();
+	m_RotationText->Init(32, false, true, "Impact");
+	m_RotationText->SetColor(255, 0, 0, 0);
 
 
 	m_Power = 0;
@@ -103,4 +107,8 @@ void Player::Render()
 		m_HpBar->m_Position.x + m_HpBar->m_Size.x / 2, m_HpBar->m_Position.y + m_HpBar->m_Size.y / 2);
 
 	m_HpBar->m_Rect.right = m_HpBar->m_Size.x - (Hp * m_HpGage);
+
+	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
+	m_RotationText->print(std::to_string(abs((int)(D3DXToDegree(m_Barrel)))), 100,800);
+	Renderer::GetInst()->GetSprite()->End();
 }

@@ -12,7 +12,7 @@ Beak::Beak()
 	m_SKY->SetParent(this);
 	m_SKY->SetPosition(1920 / 2,1080 / 2);
 
-	ObjMgr->AddObject(m_SKY, "BG");
+	//ObjMgr->AddObject(m_SKY, "BG");
 	//ObjMgr->AddObject(m_BG, "BG");
 	
 	ObjMgr->AddObject(new SPG(Vec2(0, 0)), "Tank");
