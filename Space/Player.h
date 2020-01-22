@@ -8,6 +8,11 @@ public:
 	Sprite* m_PowerBar;
 	Sprite* m_HpBar;
 
+	Sprite* m_GroundRot;
+	Sprite* m_BarrelRot;
+	Sprite* m_MinRot;
+	Sprite* m_MaxRot;
+
 	Player();
 	~Player();
 
@@ -20,6 +25,10 @@ public:
 	float m_MaxMove;
 	float m_Hp;
 	float m_MaxHp;
+	float m_Ground;
+	float m_Barrel;
+	float m_Min;
+	float m_Max;
 
 	Vec2 m_RotationCenter;
 

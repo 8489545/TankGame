@@ -133,6 +133,12 @@ void SPG::BarrelAngleContorl()
 	m_MaxRot = m_Rotation;
 	m_MinRot = m_Rotation + D3DXToRadian(-90);
 
+	Player::GetInst()->m_Ground = m_Rotation;
+	Player::GetInst()->m_Barrel = m_Barrel->m_Rotation;
+	Player::GetInst()->m_Max = m_MaxRot;
+	Player::GetInst()->m_Min = m_MinRot;
+
+
 	if (m_Barrel->m_Rotation > m_MaxRot)
 		m_Barrel->m_Rotation = m_MaxRot;
 

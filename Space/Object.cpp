@@ -33,11 +33,15 @@ Object::~Object()
 
 Matrix Object::GetMatrix()
 {
-	m_RotationCenter.x = -Camera::GetInst()->m_X + m_CenterPos.x;
-	m_RotationCenter.y = -Camera::GetInst()->m_Y + m_CenterPos.y;
 
-	m_ScaleCenter.x = -Camera::GetInst()->m_X;
-	m_ScaleCenter.y = -Camera::GetInst()->m_Y;
+	if (m_Tag != "UI")
+	{
+		m_RotationCenter.x = -Camera::GetInst()->m_X + m_CenterPos.x;
+		m_RotationCenter.y = -Camera::GetInst()->m_Y + m_CenterPos.y;
+
+		m_ScaleCenter.x = -Camera::GetInst()->m_X;
+		m_ScaleCenter.y = -Camera::GetInst()->m_Y;
+	}
 
 	D3DXMatrixTransformation2D(&m_wMat, &m_ScaleCenter, 0, &m_Scale, &m_RotationCenter, m_Rotation, &m_Position);
 

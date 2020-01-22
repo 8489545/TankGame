@@ -6,7 +6,6 @@ class SPG : public Object
 	Sprite* m_FrontFootPos;
 	Sprite* m_BackFootPos;
 	TextMgr* m_Text;
-	LineMgr* line;
 
 public:
 	SPG(Vec2 pos);

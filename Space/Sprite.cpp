@@ -64,7 +64,7 @@ void Sprite::Render()
 	
 	Camera::GetInst()->Render();
 	m_pSp->Begin(D3DXSPRITE_ALPHABLEND);
-	if(m_Tag == "UI")
+	if (m_Tag == "UI")
 		m_pSp->SetTransform(&GetMatrix());
 	else
 		m_pSp->SetTransform(&(Camera::GetInst()->GetWorld() * GetMatrix()));

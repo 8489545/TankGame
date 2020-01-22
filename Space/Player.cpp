@@ -15,9 +15,23 @@ Player::Player()
 	m_HpBar = Sprite::Create(L"Painting/UI/HpBar.png");
 	m_HpBar->SetPosition(1226, 960);
 
+	m_GroundRot = Sprite::Create(L"Painting/UI/GroundRot.png");
+	m_GroundRot->SetPosition(125, 970);
+	m_BarrelRot = Sprite::Create(L"Painting/UI/BarrelRot.png");
+	m_BarrelRot->SetPosition(125, 970);
+	m_MaxRot = Sprite::Create(L"Painting/UI/LimitRot.png");
+	m_MaxRot->SetPosition(125, 970);
+	m_MinRot = Sprite::Create(L"Painting/UI/LimitRot.png");
+	m_MinRot->SetPosition(125, 970);
+
 	ObjMgr->AddObject(m_MoveBar, "UI");
 	ObjMgr->AddObject(m_PowerBar, "UI");
 	ObjMgr->AddObject(m_HpBar, "UI");
+
+	ObjMgr->AddObject(m_GroundRot, "UI");
+	ObjMgr->AddObject(m_BarrelRot, "UI");
+	ObjMgr->AddObject(m_MaxRot, "UI");
+	ObjMgr->AddObject(m_MinRot, "UI");
 
 
 	m_Power = 0;
@@ -34,6 +48,11 @@ Player::Player()
 	m_PowerBar->m_Layer = 2;
 	m_MoveBar->m_Layer = 2;
 	m_HpBar->m_Layer = 2;
+
+	m_GroundRot->m_Layer = 4;
+	m_BarrelRot->m_Layer = 3;
+	m_MaxRot->m_Layer = 2;
+	m_MinRot->m_Layer = 2;
 }
 
 Player::~Player()
@@ -45,6 +64,11 @@ void Player::Update(float deltaTime, float time)
 {
 	if (m_Power >= m_MaxPower)
 		m_Power = m_MaxPower;
+
+	m_GroundRot->m_Rotation = m_Ground;
+	m_BarrelRot->m_Rotation = m_Barrel;
+	m_MaxRot->m_Rotation = m_Max;
+	m_MinRot->m_Rotation = m_Min;
 }
 
 void Player::Render()
