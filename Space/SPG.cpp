@@ -37,7 +37,6 @@ SPG::~SPG()
 
 void SPG::Update(float deltaTime, float Time)
 {
-
 	ObjMgr->CollisionCheak(this, "Tile");
 	Gravity();
 	Move();
@@ -83,11 +82,22 @@ void SPG::Move()
 	{
 		Translate(C.x * m_Speed * dt, -C.y * m_Speed * dt);
 		Player::GetInst()->m_Move -= 1.f;
+		Camera::GetInst()->Follow(this);
 	}
+	if (INPUT->GetKey(VK_RIGHT) == KeyState::UP)
+	{
+		Camera::GetInst()->Follow(nullptr);
+	}
+
 	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0)
 	{
 		Translate(-C.x * m_Speed * dt, C.y * m_Speed * dt);
 		Player::GetInst()->m_Move -= 1.f;
+		Camera::GetInst()->Follow(this);
+	}
+	if (INPUT->GetKey(VK_LEFT) == KeyState::UP)
+	{
+		Camera::GetInst()->Follow(nullptr);
 	}
 }
 
@@ -105,10 +115,9 @@ void SPG::Shot()
 	}
 	if (INPUT->GetKey(VK_SPACE) == KeyState::UP)
 	{
+		m_isLaunching = true;
 		Camera::GetInst()->Follow(nullptr);
 	}
-	if (INPUT->GetKey(VK_SPACE) == KeyState::UP)
-		m_isLaunching = true;
 
 	if (INPUT->GetButtonDown() && m_isGround && Player::GetInst()->m_Power >= 1)
 	{
