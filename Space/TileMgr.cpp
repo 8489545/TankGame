@@ -64,6 +64,10 @@ void TileMgr::DrawMap(int mapdata[],int mapsize)
 				Tile->m_LinePos2.y += 183.f;
 			}
 		}
+		if (m_Tiles.at(abs(mapdata[i]))->FileName.find(L"Water") == 0)
+		{
+			Tile->m_isWater = true;
+		}
 		ObjMgr->AddObject(Tile, "Tile");
 
 

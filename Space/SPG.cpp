@@ -79,26 +79,19 @@ void SPG::Move()
 
 	D3DXVec2Normalize(&C, &B);
 
+	for (auto& iter : ObjMgr->m_Objects)
+	{
+		
+	}
 	if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0)
 	{
 		Translate(C.x * m_Speed * dt, -C.y * m_Speed * dt);
 		Player::GetInst()->m_Move -= 1.f;
-		Camera::GetInst()->Follow(this);
 	}
-	if (INPUT->GetKey(VK_RIGHT) == KeyState::UP)
-	{
-		Camera::GetInst()->Follow(nullptr);
-	}
-
 	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0)
 	{
 		Translate(-C.x * m_Speed * dt, C.y * m_Speed * dt);
 		Player::GetInst()->m_Move -= 1.f;
-		Camera::GetInst()->Follow(this);
-	}
-	if (INPUT->GetKey(VK_LEFT) == KeyState::UP)
-	{
-		Camera::GetInst()->Follow(nullptr);
 	}
 }
 

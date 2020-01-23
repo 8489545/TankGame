@@ -18,6 +18,7 @@ public:
 	RECT m_Collision;
 
 	bool m_Visible;
+	bool m_isWater;
 
 	int m_Layer;
 	std::string m_Tag;
