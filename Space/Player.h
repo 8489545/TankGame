@@ -18,6 +18,8 @@ public:
 	TextMgr* m_RotationText;
 	LineMgr* m_MapLine;
 
+	std::vector<CANNON> m_Cannons;
+
 	Player();
 	~Player();
 
@@ -42,7 +44,6 @@ public:
 	void Update(float deltaTime, float time);
 	void Render();
 	void DrawMap();
-
-	
+	void SpawnCannon(int num,Vec2 Pos,Vec2 WaterPos);
 };
 

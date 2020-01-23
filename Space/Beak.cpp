@@ -8,9 +8,16 @@ Beak::Beak()
 	m_BG->SetParent(this);
 	m_BG->SetPosition(1920 / 2,1800 / 2);
 
+	m_GroundPos = Vec2(300, 300);
+	m_WaterPos = Vec2(600, 300);
+
 	ObjMgr->AddObject(m_BG, "BG");
-	
-	ObjMgr->AddObject(new SPG(Vec2(0, 0)), "Tank");
+
+	for (int i = 0; i < 3; ++i)
+	{
+		Player::GetInst()->SpawnCannon(i, Vec2(m_GroundPos.x + (i * 100), m_GroundPos.y),
+			Vec2(m_WaterPos.x + (i * 100), m_WaterPos.y));
+	}
 
 	TileMgr::GetInst()->InsertToPalette(L"FlatTile");
 	TileMgr::GetInst()->InsertToPalette(L"Slope30");
@@ -27,6 +34,7 @@ Beak::Beak()
 	Camera::GetInst()->m_MinY = -200;
 
 	TileMgr::GetInst()->DrawMap(map,sizeof(map) / sizeof(int));
+
 }
 
 Beak::~Beak()

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include"SPG.h"
 
 Player::Player()
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {
@@ -114,6 +115,29 @@ void Player::DrawMap()
 
 	m_NowObj->m_Position.x = m_NowPos.x * (100 - abs((MiniMapSize.x - MapSize) / MapSize * 100)) / 100 + MapPos.x;
 	m_NowObj->m_Position.y = (m_NowPos.y * 15 / 100) + MapPos.y + 50;
+}
+
+void Player::SpawnCannon(int num, Vec2 Pos, Vec2 WaterPos)
+{
+	switch (GameMgr::GetInst()->m_CannonVec.at(num))
+	{
+	case CANNON::SPG:
+		ObjMgr->AddObject(new SPG(Pos), "Tank");
+		break;
+	case CANNON::FCANNON:
+		//ObjMgr->AddObject(new SPG(Pos), "Tank");
+		break;
+	case CANNON::TOW:
+		//ObjMgr->AddObject(new SPG(Pos), "Tank");
+		break;
+	case CANNON::MTRAP:
+		//ObjMgr->AddObject(new SPG(WaterPos), "Tank");
+		break;
+	case CANNON::NONE:
+		break;
+	default:
+		break;
+	}
 }
 
 void Player::Render()

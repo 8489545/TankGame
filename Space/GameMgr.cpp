@@ -42,5 +42,6 @@ void GameMgr::ChangeNextStage()
 void GameMgr::CreatePlayer()
 {
 	Player::GetInst();
+	Player::GetInst()->m_Cannons = m_CannonVec;
 	m_isPlayer = true;
 }

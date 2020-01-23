@@ -8,8 +8,7 @@ SPG::SPG(Vec2 pos)
 	m_SPG->AddContinueFrame(L"Painting/Object/Tank/SPG", 1, 4);
 	m_SPG->Init(7, true);
 	m_SPG->SetParent(this);
-	m_SPG->m_Position = pos;
-	SetPosition(300, 300);
+	m_Position = pos;
 
 	m_Barrel = Sprite::Create(L"Painting/Object/Tank/Barrel.png");
 

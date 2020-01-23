@@ -8,6 +8,9 @@ public:
 	Beak();
 	~Beak();
 
+	Vec2 m_GroundPos;
+	Vec2 m_WaterPos;
+
 	void Update(float deltaTime, float Time);
 	void Render();
 };
