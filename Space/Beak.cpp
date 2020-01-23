@@ -4,16 +4,11 @@
 
 Beak::Beak()
 {
-	m_BG = Sprite::Create(L"Painting/BG/Beak.png");
+	m_BG = Sprite::Create(L"Painting/BG/BG.png");
 	m_BG->SetParent(this);
 	m_BG->SetPosition(1920 / 2,1800 / 2);
 
-	m_SKY = Sprite::Create(L"Painting/BG/BeakSky.png");
-	m_SKY->SetParent(this);
-	m_SKY->SetPosition(1920 / 2,1080 / 2);
-
-	//ObjMgr->AddObject(m_SKY, "BG");
-	//ObjMgr->AddObject(m_BG, "BG");
+	ObjMgr->AddObject(m_BG, "BG");
 	
 	ObjMgr->AddObject(new SPG(Vec2(0, 0)), "Tank");
 
@@ -40,6 +35,8 @@ Beak::~Beak()
 
 void Beak::Update(float deltaTime, float Time)
 {
+	m_BG->m_Position.x = Camera::GetInst()->m_X + 1920 / 2;
+	m_BG->m_Position.y = Camera::GetInst()->m_Y + 1080 / 2;
 }
 
 void Beak::Render()
