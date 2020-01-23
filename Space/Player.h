@@ -13,6 +13,8 @@ public:
 	Sprite* m_MinRot;
 	Sprite* m_MaxRot;
 
+	Sprite* m_NowObj;
+
 	TextMgr* m_RotationText;
 	LineMgr* m_MapLine;
 
@@ -31,6 +33,7 @@ public:
 	float m_Max;
 
 	Vec2 m_RotationCenter;
+	Vec2 m_NowPos;
 
 	float m_PowerGage;
 	float m_MoveGage;

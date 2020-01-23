@@ -24,6 +24,9 @@ Player::Player()
 	m_MinRot = Sprite::Create(L"Painting/UI/LimitRot.png");
 	m_MinRot->SetPosition(125, 970);
 
+	m_NowObj = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
+	m_NowObj->SetPosition(0, 0);
+
 	ObjMgr->AddObject(m_MoveBar, "UI");
 	ObjMgr->AddObject(m_PowerBar, "UI");
 	ObjMgr->AddObject(m_HpBar, "UI");
@@ -32,6 +35,8 @@ Player::Player()
 	ObjMgr->AddObject(m_BarrelRot, "UI");
 	ObjMgr->AddObject(m_MaxRot, "UI");
 	ObjMgr->AddObject(m_MinRot, "UI");
+
+	ObjMgr->AddObject(m_NowObj, "UI");
 
 	m_RotationText = new TextMgr();
 	m_RotationText->Init(32, false, true, "Impact");
@@ -60,6 +65,8 @@ Player::Player()
 	m_BarrelRot->m_Layer = 3;
 	m_MaxRot->m_Layer = 2;
 	m_MinRot->m_Layer = 2;
+
+	m_NowObj->m_Layer = 2;
 }
 
 Player::~Player()
@@ -104,6 +111,9 @@ void Player::DrawMap()
 	}
 
 	m_MapLine->DrawLine(Map, TileNum);
+
+	m_NowObj->m_Position.x = m_NowPos.x * (100 - abs((MiniMapSize.x - MapSize) / MapSize * 100)) / 100 + MapPos.x;
+	m_NowObj->m_Position.y = (m_NowPos.y * 15 / 100) + MapPos.y + 50;
 }
 
 void Player::Render()

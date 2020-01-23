@@ -48,6 +48,7 @@ void SPG::Update(float deltaTime, float Time)
 	m_isGround = false;
 	m_PrevRotation = m_Rotation;
 	m_PrevPos = m_Position;
+	Player::GetInst()->m_NowPos = m_Position;
 
 	m_SPG->Update(deltaTime, Time);
 }
