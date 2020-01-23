@@ -78,17 +78,30 @@ void SPG::Move()
 	C = A - B;
 
 	D3DXVec2Normalize(&C, &B);
+	m_FrontWater = false;
+	m_BackWater = false;
 
 	for (auto& iter : ObjMgr->m_Objects)
 	{
-		
+		RECT rc;
+		if (iter->m_isWater)
+		{
+			if (IntersectRect(&rc, &m_FrontFootPos->m_Collision, &iter->m_Collision))
+			{
+				m_FrontWater = true;
+			}
+			if (IntersectRect(&rc, &m_BackFootPos->m_Collision, &iter->m_Collision))
+			{
+				m_BackWater = true;
+			}
+		}
 	}
-	if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0)
+	if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0 && !m_FrontWater)
 	{
 		Translate(C.x * m_Speed * dt, -C.y * m_Speed * dt);
 		Player::GetInst()->m_Move -= 1.f;
 	}
-	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0)
+	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0 && !m_BackWater)
 	{
 		Translate(-C.x * m_Speed * dt, C.y * m_Speed * dt);
 		Player::GetInst()->m_Move -= 1.f;

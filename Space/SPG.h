@@ -15,6 +15,8 @@ public:
 	bool m_isGround;
 	bool m_isLaunching;
 	bool m_isMove;
+	bool m_FrontWater;
+	bool m_BackWater;
 	float m_GroundHeight;
 	float m_Speed;
 	float m_PrevRotation;
