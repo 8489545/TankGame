@@ -83,7 +83,7 @@ void Player::DrawMap()
 {
 	int TileNum = 0;
 	std::vector<Object*> Tile;
-	Vec2 MapPos = Vec2(1409, 700);
+	Vec2 MapPos = Vec2(1400, 850);
 	Vec2 MiniMapSize = Vec2(536,196);
 	for (auto& iter : ObjMgr->m_Objects)
 	{
@@ -100,8 +100,7 @@ void Player::DrawMap()
 	for (int i = 0; i < Tile.size(); ++i)
 	{
 		Map[i].x = Tile.at(i)->m_Position.x * (100 - abs((MiniMapSize.x - MapSize) / MapSize * 100)) / 100 + MapPos.x;
-		Map[i].y = Tile.at(i)->m_Position.y * 30 / 100 + MapPos.y;
-		printf("x y %f %f\n", Map[i].x,Map[i].y);
+		Map[i].y = (Tile.at(i)->m_Position.y * 15 / 100) + MapPos.y;
 	}
 
 	m_MapLine->DrawLine(Map, TileNum);

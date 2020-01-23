@@ -23,7 +23,7 @@ Beak::Beak()
 	TileMgr::GetInst()->InsertToPalette(L"Water");
 	TileMgr::GetInst()->SetTilePos(Vec2(-1000 / 2,2200 / 2));
 
-	int map[] = {0,0,0,0,0,0,1,0,-2,0,3,3,3,3,3,3,3,3,1,0,-2,0,0,0,0};
+	int map[] = {0,0,0,0,0,0,1,0,-2,0,3,3,3,3,3,3,3,3,1,0,-2,0,0,0,0,1,1,0,0,0,0,-2,0,0,0,0};
 
 	Camera::GetInst()->m_MaxX = (sizeof(map) / sizeof(int) * 300) - 1000 - 1920;
 	Camera::GetInst()->m_MinX = -650;
