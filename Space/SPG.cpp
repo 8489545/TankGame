@@ -15,6 +15,8 @@ SPG::SPG(Vec2 pos)
 	m_FrontFootPos = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
 	m_BackFootPos = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
 
+	m_Active = Sprite::Create(L"Painting/Object/Tank/Active.png");
+
 	m_FrontFootPos->m_Visible = false;
 	m_BackFootPos->m_Visible = false;
 
@@ -28,6 +30,8 @@ SPG::SPG(Vec2 pos)
 	m_Barrel->m_CenterPos.x = -70;
 
 	INPUT->ButtonDown(false);
+
+	m_isActive = false;
 }
 
 SPG::~SPG()
@@ -37,18 +41,42 @@ SPG::~SPG()
 void SPG::Update(float deltaTime, float Time)
 {
 	ObjMgr->CollisionCheak(this, "Tile");
+
+	if (CollisionMgr::GetInst()->MouseWithBoxSize(this) && INPUT->GetButtonDown() && !m_isActive)
+	{
+		m_isActive = true;
+		INPUT->ButtonDown(false);
+	}
+	if (CollisionMgr::GetInst()->MouseWithBoxSize(this) && INPUT->GetButtonDown() && m_isActive)
+	{
+		m_isActive = false;
+		INPUT->ButtonDown(false);
+	}
 	Gravity();
-	Move();
-	Shot();
-	BarrelAngleContorl();
-	SetFootPos();
-	CheakMove();
+	m_Barrel->m_Position.x = m_Position.x - 85 + cos(m_Rotation) * m_Size.x;
+	m_Barrel->m_Position.y = m_Position.y - 35;
+	m_Active->m_Position = m_Position;
+	m_Active->m_Rotation = m_Rotation;
 
-	m_isGround = false;
-	m_PrevRotation = m_Rotation;
-	m_PrevPos = m_Position;
-	Player::GetInst()->m_NowPos = m_Position;
+	if (m_isActive)
+	{
+		//Camera::GetInst()->Follow(this);
+		Move();
+		Shot();
+		BarrelAngleContorl();
+		SetFootPos();
+		CheakMove();
 
+		m_isGround = false;
+		m_PrevRotation = m_Rotation;
+		m_PrevPos = m_Position;
+		Player::GetInst()->m_NowPos = m_Position;
+		m_Active->m_Visible = true;
+	}
+	else
+	{
+		m_Active->m_Visible = false;
+	}
 	m_SPG->Update(deltaTime, Time);
 }
 
@@ -58,6 +86,7 @@ void SPG::Render()
 	m_Barrel->Render();
 	m_FrontFootPos->Render();
 	m_BackFootPos->Render();
+	m_Active->Render();
 }
 
 void SPG::OnCollision(Object* other)
@@ -111,32 +140,18 @@ void SPG::Shot()
 {
 	if (INPUT->GetKey(VK_SPACE) == KeyState::PRESS)
 	{
-		if (m_isLaunching)
-		{
-			Player::GetInst()->m_Power = 0;
-			m_isLaunching = false;
-		}
 		Player::GetInst()->m_Power++;
-		Camera::GetInst()->Follow(this);
 	}
 	if (INPUT->GetKey(VK_SPACE) == KeyState::UP)
 	{
-		m_isLaunching = true;
-		Camera::GetInst()->Follow(nullptr);
-	}
-
-	if (INPUT->GetButtonDown() && m_isGround && Player::GetInst()->m_Power >= 1)
-	{
-		ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power, m_Barrel->m_Rotation, m_BarrelEnd), "CannonBall");
+		if(Player::GetInst()->m_Power > 0)
+			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power, m_Barrel->m_Rotation, m_BarrelEnd), "CannonBall");
 		Player::GetInst()->m_Power = 0;
-		INPUT->ButtonDown(false);
 	}
 }
 
 void SPG::BarrelAngleContorl()
 {
-	m_Barrel->m_Position.x = m_Position.x - 85 + cos(m_Rotation) * m_Size.x;
-	m_Barrel->m_Position.y = m_Position.y - 35;
 
 	m_MaxRot = m_Rotation;
 	m_MinRot = m_Rotation + D3DXToRadian(-90);

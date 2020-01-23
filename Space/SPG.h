@@ -5,6 +5,7 @@ class SPG : public Object
 	Sprite* m_Barrel;
 	Sprite* m_FrontFootPos;
 	Sprite* m_BackFootPos;
+	Sprite* m_Active;
 
 public:
 	SPG(Vec2 pos);
@@ -13,7 +14,6 @@ public:
 	Vec2 m_CorrectionValue;
 
 	bool m_isGround;
-	bool m_isLaunching;
 	bool m_isMove;
 	bool m_FrontWater;
 	bool m_BackWater;
@@ -24,6 +24,8 @@ public:
 	float m_MinRot;
 	float m_FrontRot;
 	float m_BackRot;
+
+	bool m_isActive;
 
 	Vec2 A, B, C;
 	Vec2 m_BarrelEnd;
