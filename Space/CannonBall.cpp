@@ -45,7 +45,8 @@ void CannonBall::OnCollision(Object* other)
 {
 	if (other->m_Tag == "Tile")
 	{
-		if (CollisionMgr::GetInst()->LineToLineCollide(Vertex1, Vertex2, other->m_LinePos1, other->m_LinePos2))
+		if (CollisionMgr::GetInst()->LineToLineCollide(Vertex1, Vertex2, other->m_LinePos1, other->m_LinePos2) 
+			|| CollisionMgr::GetInst()->LineToLineCollide(Vertex2, Vertex3, other->m_LinePos1, other->m_LinePos2))
 		{
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position),"Effect");
 			SetDestroy(true);

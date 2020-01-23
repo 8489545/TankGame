@@ -37,6 +37,9 @@ Player::Player()
 	m_RotationText->Init(32, false, true, "Impact");
 	m_RotationText->SetColor(255, 0, 0, 0);
 
+	m_MapLine = new LineMgr();
+	m_MapLine->Init(2, true);
+	m_MapLine->SetColor(D3DXCOLOR(255, 0, 0, 255));
 
 	m_Power = 0;
 	m_MaxPower = 100;
@@ -73,6 +76,35 @@ void Player::Update(float deltaTime, float time)
 	m_BarrelRot->m_Rotation = m_Barrel;
 	m_MaxRot->m_Rotation = m_Max;
 	m_MinRot->m_Rotation = m_Min;
+
+}
+
+void Player::DrawMap()
+{
+	int TileNum = 0;
+	std::vector<Object*> Tile;
+	Vec2 MapPos = Vec2(1409, 700);
+	Vec2 MiniMapSize = Vec2(536,196);
+	for (auto& iter : ObjMgr->m_Objects)
+	{
+		if (iter->m_Tag == "Tile")
+		{
+			Tile.push_back(iter);
+		}
+	}
+	TileNum = Tile.size();
+	float MapSize = (TileNum -1) * 300.f;
+
+	Vec2* Map = new Vec2[TileNum];
+
+	for (int i = 0; i < Tile.size(); ++i)
+	{
+		Map[i].x = Tile.at(i)->m_Position.x * (100 - abs((MiniMapSize.x - MapSize) / MapSize * 100)) / 100 + MapPos.x;
+		Map[i].y = Tile.at(i)->m_Position.y * 30 / 100 + MapPos.y;
+		printf("x y %f %f\n", Map[i].x,Map[i].y);
+	}
+
+	m_MapLine->DrawLine(Map, TileNum);
 }
 
 void Player::Render()
@@ -111,4 +143,6 @@ void Player::Render()
 	Renderer::GetInst()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
 	m_RotationText->print(std::to_string(abs((int)(D3DXToDegree(m_Barrel)))), 100,800);
 	Renderer::GetInst()->GetSprite()->End();
+
+	DrawMap();
 }

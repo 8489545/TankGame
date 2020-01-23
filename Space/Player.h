@@ -14,12 +14,10 @@ public:
 	Sprite* m_MaxRot;
 
 	TextMgr* m_RotationText;
+	LineMgr* m_MapLine;
 
 	Player();
 	~Player();
-
-	void Update(float deltaTime, float time);
-	void Render();
 
 	float m_Power;
 	float m_MaxPower;
@@ -37,5 +35,11 @@ public:
 	float m_PowerGage;
 	float m_MoveGage;
 	float m_HpGage;
+
+	void Update(float deltaTime, float time);
+	void Render();
+	void DrawMap();
+
+	
 };
 
