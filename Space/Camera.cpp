@@ -21,6 +21,7 @@ void Camera::Init()
 	m_MaxY = 0;
 	m_MinY = 0;
 	m_MovingMode = false;
+	m_CannonBall = false;
 }
 
 void Camera::Translate()

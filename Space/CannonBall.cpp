@@ -20,6 +20,7 @@ CannonBall::~CannonBall()
 
 void CannonBall::Update(float deltaTime, float time)
 {
+	Camera::GetInst()->m_CannonBall = true;
 	ObjMgr->CollisionCheak(this, "Tile");
 	Camera::GetInst()->Follow(this);
 	m_Position.x = (m_Power * cos(m_StartingRotation)) * t + m_Pos.x ;
@@ -49,6 +50,7 @@ void CannonBall::OnCollision(Object* other)
 			|| CollisionMgr::GetInst()->LineToLineCollide(Vertex2, Vertex3, other->m_LinePos1, other->m_LinePos2))
 		{
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position),"Effect");
+			Camera::GetInst()->m_CannonBall = false;
 			SetDestroy(true);
 		}
 	}

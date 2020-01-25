@@ -31,7 +31,7 @@ SPG::SPG(Vec2 pos)
 
 	INPUT->ButtonDown(false);
 
-	m_isActive = false;
+	m_LockOn = false;
 }
 
 SPG::~SPG()
@@ -42,39 +42,26 @@ void SPG::Update(float deltaTime, float Time)
 {
 	ObjMgr->CollisionCheak(this, "Tile");
 
-	if (CollisionMgr::GetInst()->MouseWithBoxSize(this) && INPUT->GetButtonDown() && !m_isActive)
-	{
-		m_isActive = true;
-		INPUT->ButtonDown(false);
-	}
-	if (CollisionMgr::GetInst()->MouseWithBoxSize(this) && INPUT->GetButtonDown() && m_isActive)
-	{
-		m_isActive = false;
-		INPUT->ButtonDown(false);
-	}
+	LockOn();
 	Gravity();
-	m_Barrel->m_Position.x = m_Position.x - 85 + cos(m_Rotation) * m_Size.x;
-	m_Barrel->m_Position.y = m_Position.y - 35;
-	m_Active->m_Position = m_Position;
-	m_Active->m_Rotation = m_Rotation;
+	SetObjectPos();
 
-	if (m_isActive)
+	if (m_LockOn)
 	{
-		//Camera::GetInst()->Follow(this);
+		if(!Camera::GetInst()->m_CannonBall)
+			Camera::GetInst()->Follow(this);
+		else
+			Camera::GetInst()->Follow(nullptr);
 		Move();
 		Shot();
 		BarrelAngleContorl();
 		SetFootPos();
 		CheakMove();
-
-		m_isGround = false;
-		m_PrevRotation = m_Rotation;
-		m_PrevPos = m_Position;
-		Player::GetInst()->m_NowPos = m_Position;
-		m_Active->m_Visible = true;
+		SetVar();
 	}
 	else
 	{
+		Camera::GetInst()->Follow(nullptr);
 		m_Active->m_Visible = false;
 	}
 	m_SPG->Update(deltaTime, Time);
@@ -94,6 +81,30 @@ void SPG::OnCollision(Object* other)
 	if (other->m_Tag == "Tile")
 	{
 		GroundCol(other);
+	}
+}
+
+void SPG::LockOn()
+{
+	if (CollisionMgr::GetInst()->MouseWithBoxSize(this) && INPUT->GetButtonDown())
+	{
+		if (!m_LockOn)
+			m_LockOn = true;
+		else if (m_LockOn)
+			m_LockOn = false;
+		INPUT->ButtonDown(false);
+	}
+
+	if (m_LockOn)
+	{
+		for (auto& iter : ObjMgr->m_Objects)
+		{
+			if (iter != this)
+			{
+				if (iter->m_LockOn == true)
+					iter->m_LockOn = false;
+			}
+		}
 	}
 }
 
@@ -313,6 +324,23 @@ void SPG::CheakMove()
 		m_isMove = true;
 	else
 		m_isMove = false;
+}
+
+void SPG::SetObjectPos()
+{
+	m_Barrel->m_Position.x = m_Position.x - 85 + cos(m_Rotation) * m_Size.x;
+	m_Barrel->m_Position.y = m_Position.y - 35;
+	m_Active->m_Position = m_Position;
+	m_Active->m_Rotation = m_Rotation;
+}
+
+void SPG::SetVar()
+{
+	m_isGround = false;
+	m_PrevRotation = m_Rotation;
+	m_PrevPos = m_Position;
+	Player::GetInst()->m_NowPos = m_Position;
+	m_Active->m_Visible = true;
 }
 
 float SPG::DotToLineDistance(Vec2 Dot, Vec2 Line1, Vec2 Line2)

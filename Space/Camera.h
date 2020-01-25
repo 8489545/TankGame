@@ -19,6 +19,8 @@ public:
 	float m_Timer;
 	bool m_MovingMode;
 
+	bool m_CannonBall;
+
 	float m_MaxX, m_MaxY;
 	float m_MinX, m_MinY;
 

@@ -31,7 +31,7 @@ Beak::Beak()
 	Camera::GetInst()->m_MinX = -650;
 
 	Camera::GetInst()->m_MaxY = 300;
-	Camera::GetInst()->m_MinY = -200;
+	Camera::GetInst()->m_MinY = -300;
 
 	TileMgr::GetInst()->DrawMap(map,sizeof(map) / sizeof(int));
 

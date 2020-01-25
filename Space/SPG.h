@@ -17,6 +17,7 @@ public:
 	bool m_isMove;
 	bool m_FrontWater;
 	bool m_BackWater;
+	bool m_CannonBall;
 	float m_GroundHeight;
 	float m_Speed;
 	float m_PrevRotation;
@@ -24,8 +25,6 @@ public:
 	float m_MinRot;
 	float m_FrontRot;
 	float m_BackRot;
-
-	bool m_isActive;
 
 	Vec2 A, B, C;
 	Vec2 m_BarrelEnd;
@@ -35,6 +34,7 @@ public:
 	void Render();
 	void OnCollision(Object* other);
 
+	void LockOn();
 	void Move();
 	void Shot();
 	void BarrelAngleContorl();
@@ -42,6 +42,8 @@ public:
 	void GroundCol(Object* other);
 	void SetFootPos();
 	void CheakMove();
+	void SetObjectPos();
+	void SetVar();
 	float DotToLineDistance(Vec2 Dot, Vec2 Line1, Vec2 Line2);
 };
 
