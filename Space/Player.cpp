@@ -127,7 +127,7 @@ void Player::SpawnCannon(int num, Vec2 Pos, Vec2 WaterPos)
 	case CANNON::FCANNON:
 		//ObjMgr->AddObject(new SPG(Pos), "Tank");
 		break;
-	case CANNON::TOW:
+	case CANNON::MRL:
 		//ObjMgr->AddObject(new SPG(Pos), "Tank");
 		break;
 	case CANNON::MTRAP:
