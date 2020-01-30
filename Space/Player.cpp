@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include"SPG.h"
+#include"MRL.h"
 
 Player::Player()
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {
@@ -128,7 +129,7 @@ void Player::SpawnCannon(int num, Vec2 Pos, Vec2 WaterPos)
 		//ObjMgr->AddObject(new SPG(Pos), "Tank");
 		break;
 	case CANNON::MRL:
-		//ObjMgr->AddObject(new SPG(Pos), "Tank");
+		ObjMgr->AddObject(new MRL(Pos), "Tank");
 		break;
 	case CANNON::MTRAP:
 		//ObjMgr->AddObject(new SPG(WaterPos), "Tank");

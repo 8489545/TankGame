@@ -3,6 +3,7 @@ class CannonBall : public Object
 {
 public:
 	Sprite* m_CannonBall;
+	Sprite* m_Missile;
 
 	CannonBall(float power,float rot,Vec2 Pos);
 	~CannonBall();

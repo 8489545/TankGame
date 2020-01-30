@@ -111,7 +111,7 @@ void CannonMgr::Update(float deltaTime, float Time)
 	if(m_CannonNum >= 1)
 		Delete();
 
-	if (CollisionMgr::GetInst()->MouseWithBoxSize(m_GameStart) && INPUT->GetButtonDown())
+	if (CollisionMgr::GetInst()->MouseWithBoxSize(m_GameStart) && INPUT->GetButtonDown() && m_CannonNum == 3)
 	{
 		GameMgr::GetInst()->m_CannonVec = PlayerCannon;
 		GameMgr::GetInst()->ChangeNextStage();

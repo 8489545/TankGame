@@ -111,6 +111,9 @@
     <ClCompile Include="EffectMgr.cpp">
       <Filter>Game\Mgrs</Filter>
     </ClCompile>
+    <ClCompile Include="MRL.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -196,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="EffectMgr.h">
       <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="MRL.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

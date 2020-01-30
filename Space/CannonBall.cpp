@@ -6,8 +6,11 @@ CannonBall::CannonBall(float power, float rot, Vec2 Pos)
 	m_CannonBall = Sprite::Create(L"Painting/Object/CannonBall.png");
 	m_CannonBall->SetParent(this);
 
+	m_Missile = Sprite::Create(L"Painting/Object/Missile.png");
+	m_Missile->SetParent(this);
+
 	m_Pos = Pos;
-	m_Power = power / 2 + 5;
+	m_Power = power / 3 + 5;
 	m_Rotation = rot;
 	m_StartingRotation = rot;
 	GR = 0.2f;
@@ -39,7 +42,10 @@ void CannonBall::Update(float deltaTime, float time)
 
 void CannonBall::Render()
 {
-	m_CannonBall->Render();
+	if(m_Tag == "CannonBall")
+		m_CannonBall->Render();
+	if (m_Tag == "Missile")
+		m_Missile->Render();
 }
 
 void CannonBall::OnCollision(Object* other)
