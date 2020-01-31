@@ -20,8 +20,14 @@ EffectMgr::~EffectMgr()
 
 void EffectMgr::Update(float deltaTime, float time)
 {
+	if (m_Tag == "Smoke")
+	{
+		Camera::GetInst()->m_CannonBall = true;
+		Camera::GetInst()->Follow(this);
+	}
 	if (Effect->m_CurrentFrame >= End - 1)
 	{
+		Camera::GetInst()->m_CannonBall = false;
 		ObjMgr->RemoveObject(this);
 	}
 	Effect->Update(deltaTime, time);

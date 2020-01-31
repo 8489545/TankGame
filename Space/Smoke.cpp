@@ -44,9 +44,11 @@ void Smoke::OnCollision(Object* other)
 	if (other->m_Tag == "Tile")
 	{
 		if (CollisionMgr::GetInst()->LineToLineCollide(Vertex1, Vertex2, other->m_LinePos1, other->m_LinePos2)
-			|| CollisionMgr::GetInst()->LineToLineCollide(Vertex2, Vertex3, other->m_LinePos1, other->m_LinePos2))
+			|| CollisionMgr::GetInst()->LineToLineCollide(Vertex2, Vertex3, other->m_LinePos1, other->m_LinePos2)
+			|| CollisionMgr::GetInst()->LineToLineCollide(Vertex3, Vertex4, other->m_LinePos1, other->m_LinePos2)
+			|| CollisionMgr::GetInst()->LineToLineCollide(Vertex4, Vertex1, other->m_LinePos1, other->m_LinePos2))
 		{
-			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/Smoke/", 1, 20, Vec2(m_Position.x,m_Position.y - 100)), "Effect");
+			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/Smoke/", 1, 20, Vec2(m_Position.x,m_Position.y - 100)), "Smoke");
 			Camera::GetInst()->m_CannonBall = false;
 			SetDestroy(true);
 		}
@@ -55,7 +57,7 @@ void Smoke::OnCollision(Object* other)
 
 void Smoke::SetRotation()
 {
-	m_Rotation += D3DXToRadian(10);
+	m_Rotation += D3DXToRadian(1);
 }
 
 void Smoke::SetVertex()
