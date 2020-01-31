@@ -120,6 +120,9 @@
     <ClCompile Include="Smoke.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -213,6 +216,9 @@
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Smoke.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
