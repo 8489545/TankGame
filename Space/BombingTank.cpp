@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "BombingTank.h"
-#include"CannonBall.h"
+#include"Smoke.h"
 
 BombingTank::BombingTank(Vec2 pos)
 {
@@ -156,7 +156,7 @@ void BombingTank::Shot()
 	if (INPUT->GetKey(VK_SPACE) == KeyState::UP)
 	{
 		if (Player::GetInst()->m_Power > 0)
-			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power, m_Barrel->m_Rotation, m_BarrelEnd), "CannonBall");
+			ObjMgr->AddObject(new Smoke(Player::GetInst()->m_Power, m_Barrel->m_Rotation, m_BarrelEnd), "CannonBall");
 		Player::GetInst()->m_Power = 0;
 	}
 }
