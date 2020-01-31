@@ -114,6 +114,9 @@
     <ClCompile Include="MRL.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="BombingTank.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -201,6 +204,9 @@
       <Filter>Game\Mgrs</Filter>
     </ClInclude>
     <ClInclude Include="MRL.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BombingTank.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include "Player.h"
 #include"SPG.h"
 #include"MRL.h"
+#include"BombingTank.h"
 
 Player::Player()
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {
@@ -125,8 +126,8 @@ void Player::SpawnCannon(int num, Vec2 Pos, Vec2 WaterPos)
 	case CANNON::SPG:
 		ObjMgr->AddObject(new SPG(Pos), "Tank");
 		break;
-	case CANNON::FCANNON:
-		//ObjMgr->AddObject(new SPG(Pos), "Tank");
+	case CANNON::BOMBINGTANK:
+		ObjMgr->AddObject(new BombingTank(Pos), "Tank");
 		break;
 	case CANNON::MRL:
 		ObjMgr->AddObject(new MRL(Pos), "Tank");

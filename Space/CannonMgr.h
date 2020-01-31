@@ -2,7 +2,7 @@
 enum class CANNON
 {
 	SPG, //자주포
-	FCANNON, //고정포
+	BOMBINGTANK, //고정포
 	MRL, //미사일런처
 	MTRAP, //해상함정
 	NONE
@@ -12,7 +12,7 @@ class CannonMgr : public Object
 	Sprite* m_CannonPanel;
 
 	Sprite* m_SPG;
-	Sprite* m_FCannon;
+	Sprite* m_BombingTank;
 	Sprite* m_MRL;
 	Sprite* m_MTRAP;
 	Sprite* m_GameStart;

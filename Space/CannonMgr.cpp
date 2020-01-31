@@ -11,9 +11,9 @@ CannonMgr::CannonMgr()
 	m_SPG->SetParent(this);
 	m_SPG->SetPosition(500, 1080 / 2);
 
-	m_FCannon = Sprite::Create(L"Painting/Object/FCannon.png");
-	m_FCannon->SetParent(this);
-	m_FCannon->SetPosition(800, 1080 / 2);
+	m_BombingTank = Sprite::Create(L"Painting/Object/BombingTank.png");
+	m_BombingTank->SetParent(this);
+	m_BombingTank->SetPosition(800, 1080 / 2);
 
 	m_MRL = Sprite::Create(L"Painting/Object/MRL.png");
 	m_MRL->SetParent(this);
@@ -50,8 +50,8 @@ void CannonMgr::AddCannon(CANNON cannon)
 		m_Cannons[m_CannonNum]->SetParent(this);
 		m_Cannons[m_CannonNum]->m_Position = UIPos;
 		break;
-	case CANNON::FCANNON:
-		m_Cannons[m_CannonNum] = Sprite::Create(L"Painting/UI/FCannonSelect.png");
+	case CANNON::BOMBINGTANK:
+		m_Cannons[m_CannonNum] = Sprite::Create(L"Painting/UI/BombingTankSelect.png");
 		m_Cannons[m_CannonNum]->SetParent(this);
 		m_Cannons[m_CannonNum]->m_Position = UIPos;
 		break;
@@ -92,9 +92,9 @@ void CannonMgr::Update(float deltaTime, float Time)
 			AddCannon(CANNON::SPG);
 			INPUT->ButtonDown(false);
 		}
-		if (CollisionMgr::GetInst()->MouseWithBoxSize(m_FCannon) && INPUT->GetButtonDown())
+		if (CollisionMgr::GetInst()->MouseWithBoxSize(m_BombingTank) && INPUT->GetButtonDown())
 		{
-			AddCannon(CANNON::FCANNON);
+			AddCannon(CANNON::BOMBINGTANK);
 			INPUT->ButtonDown(false);
 		}
 		if (CollisionMgr::GetInst()->MouseWithBoxSize(m_MRL) && INPUT->GetButtonDown())
@@ -125,7 +125,7 @@ void CannonMgr::Render()
 	m_CannonPanel->Render();
 	m_SPG->Render();
 	m_MRL->Render();
-	m_FCannon->Render();
+	m_BombingTank->Render();
 	m_MTRAP->Render();
 	
 	if (m_CannonNum == 3)
