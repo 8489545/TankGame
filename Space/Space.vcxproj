@@ -150,6 +150,7 @@
     <ClCompile Include="LineMgr.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="MRL.cpp" />
+    <ClCompile Include="MTRAP.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectMgr.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="LineMgr.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="MRL.h" />
+    <ClInclude Include="MTRAP.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectMgr.h" />
     <ClInclude Include="Player.h" />
