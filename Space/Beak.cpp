@@ -9,7 +9,7 @@ Beak::Beak()
 	m_BG->SetPosition(1920 / 2,1800 / 2);
 
 	m_GroundPos = Vec2(300, 300);
-	m_WaterPos = Vec2(600, 300);
+	m_WaterPos = Vec2(2500, 300);
 
 	ObjMgr->AddObject(m_BG, "BG");
 

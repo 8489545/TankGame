@@ -11,14 +11,15 @@ MTRAP::MTRAP(Vec2 pos)
 	m_Position = pos;
 
 	m_Barrel = Sprite::Create(L"Painting/Object/Tank/MTRAPBarrel.png");
+	m_Line = Sprite::Create(L"Painting/Object/Tank/Line.png");
+	m_Active = Sprite::Create(L"Painting/Object/Tank/Active.png");
 
 	m_FrontFootPos = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
 	m_BackFootPos = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
 
-	m_Active = Sprite::Create(L"Painting/Object/Tank/Active.png");
-
 	m_FrontFootPos->m_Visible = false;
 	m_BackFootPos->m_Visible = false;
+	m_Line->m_Visible = false;
 
 	m_isGround = false;
 	m_Speed = 300;
@@ -27,8 +28,8 @@ MTRAP::MTRAP(Vec2 pos)
 	m_MinRot = 0;
 
 	m_CorrectionValue = Vec2(0, 0);
-	m_Barrel->m_CenterPos.x = -25;
-	m_Barrel->m_CenterPos.y = 10;
+	m_Barrel->m_CenterPos.x = -10;
+	m_Barrel->m_CenterPos.y;
 
 	INPUT->ButtonDown(false);
 
@@ -72,6 +73,7 @@ void MTRAP::Render()
 {
 	m_MTRAP->Render();
 	m_Barrel->Render();
+	m_Line->Render();
 	m_FrontFootPos->Render();
 	m_BackFootPos->Render();
 	m_Active->Render();
@@ -136,12 +138,12 @@ void MTRAP::Move()
 			}
 		}
 	}
-	if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0 && !m_FrontWater)
+	if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0 && m_FrontWater)
 	{
 		Translate(C.x * m_Speed * dt, -C.y * m_Speed * dt);
 		Player::GetInst()->m_Move -= 1.f;
 	}
-	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0 && !m_BackWater)
+	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS && m_isGround && !Camera::GetInst()->m_MovingMode && Player::GetInst()->m_Move > 0 && m_BackWater)
 	{
 		Translate(-C.x * m_Speed * dt, C.y * m_Speed * dt);
 		Player::GetInst()->m_Move -= 1.f;
@@ -158,9 +160,7 @@ void MTRAP::Shot()
 	{
 		if (Player::GetInst()->m_Power > 0)
 		{
-			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power - 2, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x, m_BarrelEnd.y)), "Missile");
-			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power + 3, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x, m_BarrelEnd.y + 20)), "Missile");
-			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x, m_BarrelEnd.y - 20)), "Missile");
+			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power - 2, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x, m_BarrelEnd.y)), "CannonBall");
 		}
 		Player::GetInst()->m_Power = 0;
 	}
@@ -213,116 +213,8 @@ void MTRAP::Gravity()
 void MTRAP::GroundCol(Object* other)
 {
 	m_isGround = true;
-	if (INPUT->GetKey(VK_RIGHT) == KeyState::PRESS && INPUT->GetKey(VK_LEFT) != KeyState::PRESS)
-	{
-		Object* obj = nullptr;
-		RECT rc;
-		for (auto& iter : ObjMgr->m_Objects)
-		{
-			if (IntersectRect(&rc, &iter->m_Collision, &m_FrontFootPos->m_Collision))
-			{
-				obj = iter;
-			}
-		}
-
-		if (obj != nullptr)
-		{
-			float NowDis = DotToLineDistance(m_FrontFootPos->m_Position, obj->m_LinePos1, obj->m_LinePos2);
-			if (IntersectRect(&rc, &obj->m_Collision, &m_FrontFootPos->m_Collision))
-			{
-				if (NowDis >= 5 && obj->m_SlopeRot < 0)
-				{
-					m_Rotation -= D3DXToRadian(1);
-
-					if (m_Rotation - D3DXToRadian(obj->m_SlopeRot) < 0.1f)
-						m_Rotation = D3DXToRadian(obj->m_SlopeRot);
-				}
-				else if (NowDis >= 5 && obj->m_SlopeRot > 0)
-				{
-					m_Rotation += D3DXToRadian(0.3);
-
-					if (abs(m_Rotation - D3DXToRadian(obj->m_SlopeRot)) < 0.1f)
-						m_Rotation = D3DXToRadian(obj->m_SlopeRot);
-				}
-				else if (NowDis >= 5 && obj->m_SlopeRot == 0)
-				{
-
-					m_Rotation -= D3DXToRadian(1);
-
-					if (abs(m_Rotation) < 0.1f)
-						m_Rotation = 0;
-				}
-			}
-		}
-		else
-		{
-			if (m_Rotation < 0)
-				m_Rotation += D3DXToRadian(1);
-
-			if (abs(m_Rotation) < 0.1f)
-				m_Rotation = 0;
-		}
-	}
-
-	if (INPUT->GetKey(VK_LEFT) == KeyState::PRESS && INPUT->GetKey(VK_RIGHT) != KeyState::PRESS)
-	{
-		Object* obj = nullptr;
-		RECT rc;
-		for (auto& iter : ObjMgr->m_Objects)
-		{
-			if (IntersectRect(&rc, &iter->m_Collision, &m_BackFootPos->m_Collision))
-			{
-				obj = iter;
-			}
-		}
-
-		if (obj != nullptr)
-		{
-			float NowDis = DotToLineDistance(m_BackFootPos->m_Position, obj->m_LinePos1, obj->m_LinePos2);
-			if (IntersectRect(&rc, &obj->m_Collision, &m_BackFootPos->m_Collision))
-			{
-				if (NowDis >= 5 && obj->m_SlopeRot < 0)
-				{
-					m_Rotation -= D3DXToRadian(1);
-
-					if (m_Rotation - D3DXToRadian(obj->m_SlopeRot) < 0.1f)
-						m_Rotation = D3DXToRadian(obj->m_SlopeRot);
-				}
-				else if (NowDis >= 5 && obj->m_SlopeRot > 0)
-				{
-					m_Rotation += D3DXToRadian(1);
-
-					if (abs(m_Rotation - D3DXToRadian(obj->m_SlopeRot)) < 0.1f)
-						m_Rotation = D3DXToRadian(obj->m_SlopeRot);
-				}
-				else if (NowDis >= 5 && obj->m_SlopeRot == 0)
-				{
-					m_Rotation += D3DXToRadian(1);
-
-					if (abs(m_Rotation) < 0.1f)
-						m_Rotation = 0;
-				}
-			}
-		}
-		else
-		{
-			if (m_Rotation > 0)
-				m_Rotation -= D3DXToRadian(1);
-
-			if (abs(m_Rotation) < 0.1f)
-				m_Rotation = 0;
-		}
-	}
 }
 
-void MTRAP::SetFootPos()
-{
-	m_FrontFootPos->m_Position.x = m_Position.x + (m_Size.x / 2) * cos(m_Rotation) - (m_Size.y / 2) * sin(m_Rotation);
-	m_FrontFootPos->m_Position.y = m_Position.y + (m_Size.x / 2) * sin(m_Rotation) + (m_Size.y / 2) * cos(m_Rotation);
-
-	m_BackFootPos->m_Position.x = m_Position.x + (-m_Size.x / 2) * cos(m_Rotation) - (m_Size.y / 2) * sin(m_Rotation);
-	m_BackFootPos->m_Position.y = m_Position.y + (-m_Size.x / 2) * sin(m_Rotation) + (m_Size.y / 2) * cos(m_Rotation);
-}
 
 void MTRAP::CheakMove()
 {
@@ -334,10 +226,21 @@ void MTRAP::CheakMove()
 
 void MTRAP::SetObjectPos()
 {
-	m_Barrel->m_Position.x = m_Position.x - 35 + m_CorrectionValue.x;
-	m_Barrel->m_Position.y = m_Position.y - 20 + m_CorrectionValue.y;
+	m_Barrel->m_Position.x = m_Position.x + 80 + m_CorrectionValue.x;
+	m_Barrel->m_Position.y = m_Position.y + m_CorrectionValue.y;
 	m_Active->m_Position = m_Position;
 	m_Active->m_Rotation = m_Rotation;
+	m_Line->m_Position.x = m_Position.x;
+	m_Line->m_Position.y = m_Position.y + 20;
+}
+
+void MTRAP::SetFootPos()
+{
+	m_FrontFootPos->m_Position.x = m_Position.x + (m_Size.x / 2) * cos(m_Rotation) - (m_Size.y / 2) * sin(m_Rotation);
+	m_FrontFootPos->m_Position.y = m_Position.y + (m_Size.x / 2) * sin(m_Rotation) + (m_Size.y / 2) * cos(m_Rotation);
+
+	m_BackFootPos->m_Position.x = m_Position.x + (-m_Size.x / 2) * cos(m_Rotation) - (m_Size.y / 2) * sin(m_Rotation);
+	m_BackFootPos->m_Position.y = m_Position.y + (-m_Size.x / 2) * sin(m_Rotation) + (m_Size.y / 2) * cos(m_Rotation);
 }
 
 void MTRAP::SetVar()

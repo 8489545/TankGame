@@ -3,6 +3,7 @@
 #include"SPG.h"
 #include"MRL.h"
 #include"BombingTank.h"
+#include"MTRAP.h"
 
 Player::Player()
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {
@@ -133,7 +134,7 @@ void Player::SpawnCannon(int num, Vec2 Pos, Vec2 WaterPos)
 		ObjMgr->AddObject(new MRL(Pos), "Tank");
 		break;
 	case CANNON::MTRAP:
-		//ObjMgr->AddObject(new SPG(WaterPos), "Tank");
+		ObjMgr->AddObject(new MTRAP(WaterPos), "Tank");
 		break;
 	case CANNON::NONE:
 		break;

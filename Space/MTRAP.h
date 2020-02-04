@@ -3,9 +3,10 @@ class MTRAP : public Object
 {
 	Animation* m_MTRAP;
 	Sprite* m_Barrel;
+	Sprite* m_Active;
+	Sprite* m_Line;
 	Sprite* m_FrontFootPos;
 	Sprite* m_BackFootPos;
-	Sprite* m_Active;
 
 public:
 	MTRAP(Vec2 pos);
@@ -40,9 +41,9 @@ public:
 	void BarrelAngleContorl();
 	void Gravity();
 	void GroundCol(Object* other);
-	void SetFootPos();
 	void CheakMove();
 	void SetObjectPos();
+	void SetFootPos();
 	void SetVar();
 	float DotToLineDistance(Vec2 Dot, Vec2 Line1, Vec2 Line2);
 };
