@@ -125,16 +125,16 @@ void Player::SpawnCannon(int num, Vec2 Pos, Vec2 WaterPos)
 	switch (GameMgr::GetInst()->m_CannonVec.at(num))
 	{
 	case CANNON::SPG:
-		ObjMgr->AddObject(new SPG(Pos), "Tank");
+		ObjMgr->AddObject(new SPG(Pos,TEAM::PLAYER), "Tank");
 		break;
 	case CANNON::BOMBINGTANK:
-		ObjMgr->AddObject(new BombingTank(Pos), "Tank");
+		ObjMgr->AddObject(new BombingTank(Pos, TEAM::PLAYER), "Tank");
 		break;
 	case CANNON::MRL:
-		ObjMgr->AddObject(new MRL(Pos), "Tank");
+		ObjMgr->AddObject(new MRL(Pos, TEAM::PLAYER), "Tank");
 		break;
 	case CANNON::MTRAP:
-		ObjMgr->AddObject(new MTRAP(WaterPos), "Tank");
+		ObjMgr->AddObject(new MTRAP(WaterPos, TEAM::PLAYER), "Tank");
 		break;
 	case CANNON::NONE:
 		break;

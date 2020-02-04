@@ -3,7 +3,7 @@ class Bomb : public Object
 {
 	Sprite* m_Bomb;
 public:
-	Bomb(Vec2 Pos);
+	Bomb(Vec2 Pos, TEAM team);
 	~Bomb();
 
 	Vec2 Vertex1, Vertex2, Vertex3, Vertex4;

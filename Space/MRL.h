@@ -8,7 +8,7 @@ class MRL : public Object
 	Sprite* m_Active;
 
 public:
-	MRL(Vec2 pos);
+	MRL(Vec2 pos, TEAM team);
 	~MRL();
 
 	Vec2 m_CorrectionValue;

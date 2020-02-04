@@ -2,7 +2,7 @@
 #include "BombingTank.h"
 #include"Smoke.h"
 
-BombingTank::BombingTank(Vec2 pos)
+BombingTank::BombingTank(Vec2 pos, TEAM team)
 {
 	m_BombingTank = new Animation();
 	m_BombingTank->AddContinueFrame(L"Painting/Object/Tank/BombingTank", 1, 1);
@@ -32,6 +32,8 @@ BombingTank::BombingTank(Vec2 pos)
 	INPUT->ButtonDown(false);
 
 	m_LockOn = false;
+
+	Team = team;
 }
 
 BombingTank::~BombingTank()
@@ -42,7 +44,8 @@ void BombingTank::Update(float deltaTime, float Time)
 {
 	ObjMgr->CollisionCheak(this, "Tile");
 
-	LockOn();
+	if (Team == TEAM::PLAYER)
+		LockOn();
 	Gravity();
 	SetObjectPos();
 
@@ -156,7 +159,7 @@ void BombingTank::Shot()
 	if (INPUT->GetKey(VK_SPACE) == KeyState::UP)
 	{
 		if (Player::GetInst()->m_Power > 0)
-			ObjMgr->AddObject(new Smoke(Player::GetInst()->m_Power, m_Barrel->m_Rotation, m_BarrelEnd), "CannonBall");
+			ObjMgr->AddObject(new Smoke(Player::GetInst()->m_Power, m_Barrel->m_Rotation, m_BarrelEnd, Team), "CannonBall");
 		Player::GetInst()->m_Power = 0;
 	}
 }

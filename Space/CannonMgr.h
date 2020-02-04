@@ -2,7 +2,7 @@
 enum class CANNON
 {
 	SPG, //자주포
-	BOMBINGTANK, //고정포
+	BOMBINGTANK, //폭격탱크
 	MRL, //미사일런처
 	MTRAP, //해상함정
 	NONE

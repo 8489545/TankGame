@@ -1,4 +1,10 @@
 #pragma once
+enum class TEAM
+{
+	PLAYER,
+	ENEMY,
+	NONE
+};
 class Object
 {
 public:
@@ -29,6 +35,8 @@ public:
 
 	Vec2 m_LinePos1;
 	Vec2 m_LinePos2;
+
+	TEAM Team;
 
 
 public:

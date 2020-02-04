@@ -5,7 +5,7 @@ public:
 	Sprite* m_CannonBall;
 	Sprite* m_Missile;
 
-	CannonBall(float power,float rot,Vec2 Pos);
+	CannonBall(float power,float rot,Vec2 Pos, TEAM team);
 	~CannonBall();
 
 	float GR;

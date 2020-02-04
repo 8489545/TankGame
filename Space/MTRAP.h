@@ -9,7 +9,7 @@ class MTRAP : public Object
 	Sprite* m_BackFootPos;
 
 public:
-	MTRAP(Vec2 pos);
+	MTRAP(Vec2 pos, TEAM team);
 	~MTRAP();
 
 	Vec2 m_CorrectionValue;

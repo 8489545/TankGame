@@ -8,7 +8,7 @@ class BombingTank : public Object
 	Sprite* m_Active;
 
 public:
-	BombingTank(Vec2 pos);
+	BombingTank(Vec2 pos, TEAM team);
 	~BombingTank();
 
 	Vec2 m_CorrectionValue;

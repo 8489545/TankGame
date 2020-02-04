@@ -2,7 +2,7 @@
 #include "MTRAP.h"
 #include"CannonBall.h"
 
-MTRAP::MTRAP(Vec2 pos)
+MTRAP::MTRAP(Vec2 pos, TEAM team)
 {
 	m_MTRAP = new Animation();
 	m_MTRAP->AddContinueFrame(L"Painting/Object/Tank/MTRAP", 1, 1);
@@ -34,6 +34,8 @@ MTRAP::MTRAP(Vec2 pos)
 	INPUT->ButtonDown(false);
 
 	m_LockOn = false;
+
+	Team = team;
 }
 
 MTRAP::~MTRAP()
@@ -44,7 +46,8 @@ void MTRAP::Update(float deltaTime, float Time)
 {
 	ObjMgr->CollisionCheak(this, "Tile");
 
-	LockOn();
+	if (Team == TEAM::PLAYER)
+		LockOn();
 	Gravity();
 	SetObjectPos();
 
@@ -160,7 +163,7 @@ void MTRAP::Shot()
 	{
 		if (Player::GetInst()->m_Power > 0)
 		{
-			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power - 2, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x, m_BarrelEnd.y)), "CannonBall");
+			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power - 2, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x, m_BarrelEnd.y), Team), "CannonBall");
 		}
 		Player::GetInst()->m_Power = 0;
 	}

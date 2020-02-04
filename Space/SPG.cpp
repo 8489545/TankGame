@@ -2,7 +2,7 @@
 #include "SPG.h"
 #include"CannonBall.h"
 
-SPG::SPG(Vec2 pos)
+SPG::SPG(Vec2 pos, TEAM team)
 {
 	m_SPG = new Animation();
 	m_SPG->AddContinueFrame(L"Painting/Object/Tank/SPG", 1, 4);
@@ -32,6 +32,8 @@ SPG::SPG(Vec2 pos)
 	INPUT->ButtonDown(false);
 
 	m_LockOn = false;
+
+	Team = team;
 }
 
 SPG::~SPG()
@@ -42,7 +44,8 @@ void SPG::Update(float deltaTime, float Time)
 {
 	ObjMgr->CollisionCheak(this, "Tile");
 
-	LockOn();
+	if(Team == TEAM::PLAYER)
+		LockOn();
 	Gravity();
 	SetObjectPos();
 
@@ -156,7 +159,7 @@ void SPG::Shot()
 	if (INPUT->GetKey(VK_SPACE) == KeyState::UP)
 	{
 		if(Player::GetInst()->m_Power > 0)
-			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power, m_Barrel->m_Rotation, m_BarrelEnd), "CannonBall");
+			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power, m_Barrel->m_Rotation, m_BarrelEnd, Team), "CannonBall");
 		Player::GetInst()->m_Power = 0;
 	}
 }

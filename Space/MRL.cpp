@@ -2,7 +2,7 @@
 #include "MRL.h"
 #include"CannonBall.h"
 
-MRL::MRL(Vec2 pos)
+MRL::MRL(Vec2 pos, TEAM team)
 {
 	m_MRL = new Animation();
 	m_MRL->AddContinueFrame(L"Painting/Object/Tank/MRL", 1, 1);
@@ -33,6 +33,8 @@ MRL::MRL(Vec2 pos)
 	INPUT->ButtonDown(false);
 
 	m_LockOn = false;
+
+	Team = team;
 }
 
 MRL::~MRL()
@@ -43,7 +45,9 @@ void MRL::Update(float deltaTime, float Time)
 {
 	ObjMgr->CollisionCheak(this, "Tile");
 
-	LockOn();
+	if (Team == TEAM::PLAYER)
+		LockOn();
+
 	Gravity();
 	SetObjectPos();
 
@@ -158,9 +162,9 @@ void MRL::Shot()
 	{
 		if (Player::GetInst()->m_Power > 0)
 		{
-			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power - 2, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x,m_BarrelEnd.y)), "Missile");
-			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power + 3, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x,m_BarrelEnd.y + 20)), "Missile");
-			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x,m_BarrelEnd.y - 20)), "Missile");
+			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power - 2, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x,m_BarrelEnd.y), Team), "Missile");
+			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power + 3, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x,m_BarrelEnd.y + 20), Team), "Missile");
+			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power, m_Barrel->m_Rotation, Vec2(m_BarrelEnd.x,m_BarrelEnd.y - 20), Team), "Missile");
 		}
 		Player::GetInst()->m_Power = 0;
 	}

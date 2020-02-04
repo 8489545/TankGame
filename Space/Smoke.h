@@ -3,7 +3,7 @@ class Smoke : public Object
 {
 	Sprite* m_Smoke;
 public:
-	Smoke(float power, float rot, Vec2 Pos);
+	Smoke(float power, float rot, Vec2 Pos, TEAM team);
 	~Smoke();
 
 	float GR;

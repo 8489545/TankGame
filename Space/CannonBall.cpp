@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CannonBall.h"
 
-CannonBall::CannonBall(float power, float rot, Vec2 Pos)
+CannonBall::CannonBall(float power, float rot, Vec2 Pos, TEAM team)
 {
 	m_CannonBall = Sprite::Create(L"Painting/Object/CannonBall.png");
 	m_CannonBall->SetParent(this);
@@ -15,6 +15,8 @@ CannonBall::CannonBall(float power, float rot, Vec2 Pos)
 	m_StartingRotation = rot;
 	GR = 0.2f;
 	t = 0;
+
+	Team = team;
 }
 
 CannonBall::~CannonBall()

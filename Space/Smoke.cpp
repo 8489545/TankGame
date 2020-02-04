@@ -2,7 +2,7 @@
 #include "Smoke.h"
 #include"Bomb.h"
 
-Smoke::Smoke(float power, float rot, Vec2 Pos)
+Smoke::Smoke(float power, float rot, Vec2 Pos, TEAM team)
 {
 	m_Smoke = Sprite::Create(L"Painting/Object/Smoke.png");
 	m_Smoke->SetParent(this);
@@ -13,6 +13,8 @@ Smoke::Smoke(float power, float rot, Vec2 Pos)
 	m_StartingRotation = rot;
 	GR = 0.2f;
 	t = 0;
+
+	Team = team;
 }
 
 Smoke::~Smoke()
@@ -49,7 +51,7 @@ void Smoke::OnCollision(Object* other)
 			|| CollisionMgr::GetInst()->LineToLineCollide(Vertex4, Vertex1, other->m_LinePos1, other->m_LinePos2))
 		{
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/Smoke/", 1, 20, Vec2(m_Position.x,m_Position.y - 100)), "Smoke");
-			ObjMgr->AddObject(new Bomb(Vec2(m_Position.x,m_Position.y - 1000)), "Bomb");
+			ObjMgr->AddObject(new Bomb(Vec2(m_Position.x,m_Position.y - 1000),Team), "Bomb");
 			Camera::GetInst()->m_CannonBall = false;
 			SetDestroy(true);
 		}

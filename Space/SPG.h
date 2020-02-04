@@ -8,7 +8,7 @@ class SPG : public Object
 	Sprite* m_Active;
 
 public:
-	SPG(Vec2 pos);
+	SPG(Vec2 pos, TEAM team);
 	~SPG();
 
 	Vec2 m_CorrectionValue;

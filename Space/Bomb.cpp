@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Bomb.h"
 
-Bomb::Bomb(Vec2 Pos)
+Bomb::Bomb(Vec2 Pos, TEAM team)
 {
 	m_Bomb = Sprite::Create(L"Painting/Object/Bomb.png");
 	m_Bomb->SetParent(this);
@@ -9,6 +9,8 @@ Bomb::Bomb(Vec2 Pos)
 	m_Position = Pos;
 
 	vy = 0;
+
+	Team = team;
 }
 
 Bomb::~Bomb()
