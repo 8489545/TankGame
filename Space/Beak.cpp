@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Beak.h"
-#include"SPG.h"
+#include"FCannon.h"
 
 Beak::Beak()
 {
@@ -18,6 +18,7 @@ Beak::Beak()
 		Player::GetInst()->SpawnCannon(i, Vec2(m_GroundPos.x + (i * 100), m_GroundPos.y),
 			Vec2(m_WaterPos.x + (i * 100), m_WaterPos.y));
 	}
+	ObjMgr->AddObject(new FCannon(m_GroundPos, TEAM::ENEMY, 1),"Enemy");
 
 	TileMgr::GetInst()->InsertToPalette(L"FlatTile");
 	TileMgr::GetInst()->InsertToPalette(L"Slope30");

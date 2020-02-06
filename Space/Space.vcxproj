@@ -144,6 +144,7 @@
     <ClCompile Include="CannonMgr.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="EffectMgr.cpp" />
+    <ClCompile Include="FCannon.cpp" />
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="IntroScene.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="CannonMgr.h" />
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="EffectMgr.h" />
+    <ClInclude Include="FCannon.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IntroScene.h" />
