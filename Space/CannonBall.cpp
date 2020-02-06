@@ -17,6 +17,11 @@ CannonBall::CannonBall(float power, float rot, Vec2 Pos, TEAM team)
 	t = 0;
 
 	Team = team;
+
+	if (Team == TEAM::ENEMY)
+	{
+		m_Power *= -1;
+	}
 }
 
 CannonBall::~CannonBall()
@@ -30,10 +35,12 @@ void CannonBall::Update(float deltaTime, float time)
 	Camera::GetInst()->Follow(this);
 	m_Position.x = (m_Power * cos(m_StartingRotation)) * t + m_Pos.x ;
 	m_Position.y = (m_Power * sin(m_StartingRotation)) * t + GR / 2 * t * t + m_Pos.y;
+
 	t++;
 
 	m_NextPos.x = (m_Power * cos(m_StartingRotation)) * t + m_Pos.x;
 	m_NextPos.y = (m_Power * sin(m_StartingRotation)) * t + GR / 2 * t * t + m_Pos.y;
+
 
 	SetRotation();
 	SetVertex();

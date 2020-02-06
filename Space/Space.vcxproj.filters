@@ -203,9 +203,6 @@
     <ClInclude Include="Player.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="TileMgr.h">
-      <Filter>Game\Mgrs</Filter>
-    </ClInclude>
     <ClInclude Include="CannonBall.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
@@ -231,6 +228,9 @@
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="FCannon.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMgr.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>

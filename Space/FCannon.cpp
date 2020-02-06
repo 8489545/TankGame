@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "FCannon.h"
+#include"CannonBall.h"
 
 FCannon::FCannon(Vec2 Pos, TEAM team, int num)
 {
@@ -8,9 +9,10 @@ FCannon::FCannon(Vec2 Pos, TEAM team, int num)
 	m_Cannon->Init(7, true);
 	m_Cannon->SetParent(this);
 	m_Position = Pos;
+	Team = team;
 
 	m_Barrel = Sprite::Create(L"Painting/Object/Tank/EnemyBarrel.png");
-	m_Barrel->m_CenterPos.x = 85;
+	A = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
 }
 
 FCannon::~FCannon()
@@ -30,11 +32,21 @@ void FCannon::Gravity()
 		vy = 0;
 }
 
+void FCannon::SetEndPos()
+{	
+
+	m_BarrelEnd.x = m_Barrel->m_Position.x + (-m_Barrel->m_Size.x / 2) * cos(m_Barrel->m_Rotation) - (m_Barrel->m_Size.y / 2) * sin(m_Barrel->m_Rotation);
+	m_BarrelEnd.y = m_Barrel->m_Position.y + (-m_Barrel->m_Size.x / 2) * sin(m_Barrel->m_Rotation) + (m_Barrel->m_Size.y / 2) * cos(m_Barrel->m_Rotation);
+
+	A->m_Position = m_BarrelEnd;
+}
+
 void FCannon::Update(float deltaTime, float time)
 {
 	ObjMgr->CollisionCheak(this, "Tile");
 	Gravity();
-	m_Barrel->m_Position = Vec2(m_Position.x - 160, m_Position.y - 35);
+	SetEndPos();
+	m_Barrel->m_Position = Vec2(m_Position.x - 80, m_Position.y - 35);
 
 	if (INPUT->GetKey(VK_UP) == KeyState::PRESS && m_isGround)
 	{
@@ -44,12 +56,15 @@ void FCannon::Update(float deltaTime, float time)
 	{
 		m_Barrel->m_Rotation -= D3DXToRadian(1);
 	}
+	if (INPUT->GetKey(VK_SPACE) == KeyState::UP && m_isGround)
+		ObjMgr->AddObject(new CannonBall(10, m_Barrel->m_Rotation, m_BarrelEnd, Team), "CannonBall");
 }
 
 void FCannon::Render()
 {
 	m_Cannon->Render();
 	m_Barrel->Render();
+	A->Render();
 }
 
 void FCannon::OnCollision(Object* other)
