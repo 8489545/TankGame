@@ -8,6 +8,14 @@ enum class STAGE
 	YEON,
 	NONE
 };
+
+enum class TURN
+{
+	PLAYER,
+	ENEMY,
+	NONE
+};
+
 class GameMgr : public Singleton<GameMgr>
 {
 public:
@@ -19,8 +27,11 @@ public:
 
 	bool m_isPlayer;
 
+	TURN m_Turn;
+
 	void NextStage(STAGE stage);
 	void ChangeNextStage();
 	void CreatePlayer();
+	void ChangeTurn();
 };
 

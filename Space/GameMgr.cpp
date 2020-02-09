@@ -45,3 +45,15 @@ void GameMgr::CreatePlayer()
 	Player::GetInst()->m_Cannons = m_CannonVec;
 	m_isPlayer = true;
 }
+
+void GameMgr::ChangeTurn()
+{
+	if (m_Turn == TURN::PLAYER)
+	{
+		m_Turn = TURN::ENEMY;
+	}
+	else if (m_Turn == TURN::ENEMY)
+	{
+		m_Turn = TURN::PLAYER;
+	}
+}
