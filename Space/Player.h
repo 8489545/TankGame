@@ -38,6 +38,7 @@ public:
 
 	Vec2 m_RotationCenter;
 	Vec2 m_NowPos;
+	Vec2 m_EnemyPos[5];
 
 	float m_PowerGage;
 	float m_MoveGage;

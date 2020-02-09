@@ -3,7 +3,6 @@ class FCannon : public Object
 {
 	Animation* m_Cannon;
 	Sprite* m_Barrel;
-	Sprite* A;
 public:
 	FCannon(Vec2 Pos, TEAM team, int num);
 	~FCannon();

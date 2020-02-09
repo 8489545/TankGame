@@ -10,9 +10,9 @@ FCannon::FCannon(Vec2 Pos, TEAM team, int num)
 	m_Cannon->SetParent(this);
 	m_Position = Pos;
 	Team = team;
+	m_CannonNum = num;
 
 	m_Barrel = Sprite::Create(L"Painting/Object/Tank/EnemyBarrel.png");
-	A = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
 }
 
 FCannon::~FCannon()
@@ -33,17 +33,15 @@ void FCannon::Gravity()
 }
 
 void FCannon::SetEndPos()
-{	
-
+{
 	m_BarrelEnd.x = m_Barrel->m_Position.x + (-m_Barrel->m_Size.x / 2) * cos(m_Barrel->m_Rotation) - (m_Barrel->m_Size.y / 2) * sin(m_Barrel->m_Rotation);
 	m_BarrelEnd.y = m_Barrel->m_Position.y + (-m_Barrel->m_Size.x / 2) * sin(m_Barrel->m_Rotation) + (m_Barrel->m_Size.y / 2) * cos(m_Barrel->m_Rotation);
-
-	A->m_Position = m_BarrelEnd;
 }
 
 void FCannon::Update(float deltaTime, float time)
 {
 	ObjMgr->CollisionCheak(this, "Tile");
+	Player::GetInst()->SetEnemyPos(m_CannonNum, m_Position);
 	Gravity();
 	SetEndPos();
 	m_Barrel->m_Position = Vec2(m_Position.x - 80, m_Position.y - 35);
@@ -64,7 +62,6 @@ void FCannon::Render()
 {
 	m_Cannon->Render();
 	m_Barrel->Render();
-	A->Render();
 }
 
 void FCannon::OnCollision(Object* other)

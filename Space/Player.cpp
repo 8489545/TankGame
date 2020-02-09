@@ -130,8 +130,8 @@ void Player::DrawMap()
 
 	for (int i = 0; i < 5; i++)
 	{
-		m_EnemyObj[i]->m_Position.x = m_NowPos.x * (100 - abs((MiniMapSize.x - MapSize) / MapSize * 100)) / 100 + MapPos.x;
-		m_EnemyObj[i]->m_Position.y = (m_NowPos.y * 15 / 100) + MapPos.y + 50;
+		m_EnemyObj[i]->m_Position.x = m_EnemyPos[i].x * (100 - abs((MiniMapSize.x - MapSize) / MapSize * 100)) / 100 + MapPos.x;
+		m_EnemyObj[i]->m_Position.y = (m_EnemyPos[i].y * 15 / 100) + MapPos.y + 50;
 	}
 }
 
@@ -160,7 +160,7 @@ void Player::SpawnCannon(int num, Vec2 Pos, Vec2 WaterPos)
 
 void Player::SetEnemyPos(int num, Vec2 Pos)
 {
-	m_EnemyObj[num]->m_Position = Pos;
+	m_EnemyPos[num] = Pos;
 	m_EnemyObj[num]->m_Visible = true;
 }
 
