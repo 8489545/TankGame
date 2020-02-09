@@ -31,6 +31,15 @@ Player::Player()
 	m_NowObj = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
 	m_NowObj->SetPosition(0, 0);
 
+	for (int i = 0; i < 5; i++)
+	{
+		m_EnemyObj[i] = Sprite::Create(L"Painting/Object/Tank/TankCol.png");
+		m_EnemyObj[i]->SetPosition(0, 0);
+		ObjMgr->AddObject(m_EnemyObj[i], "UI");
+		m_EnemyObj[i]->m_Layer = 2;
+		m_EnemyObj[i]->m_Visible = false;
+	}
+
 	ObjMgr->AddObject(m_MoveBar, "UI");
 	ObjMgr->AddObject(m_PowerBar, "UI");
 	ObjMgr->AddObject(m_HpBar, "UI");
@@ -118,6 +127,12 @@ void Player::DrawMap()
 
 	m_NowObj->m_Position.x = m_NowPos.x * (100 - abs((MiniMapSize.x - MapSize) / MapSize * 100)) / 100 + MapPos.x;
 	m_NowObj->m_Position.y = (m_NowPos.y * 15 / 100) + MapPos.y + 50;
+
+	for (int i = 0; i < 5; i++)
+	{
+		m_EnemyObj[i]->m_Position.x = m_NowPos.x * (100 - abs((MiniMapSize.x - MapSize) / MapSize * 100)) / 100 + MapPos.x;
+		m_EnemyObj[i]->m_Position.y = (m_NowPos.y * 15 / 100) + MapPos.y + 50;
+	}
 }
 
 void Player::SpawnCannon(int num, Vec2 Pos, Vec2 WaterPos)
@@ -141,6 +156,12 @@ void Player::SpawnCannon(int num, Vec2 Pos, Vec2 WaterPos)
 	default:
 		break;
 	}
+}
+
+void Player::SetEnemyPos(int num, Vec2 Pos)
+{
+	m_EnemyObj[num]->m_Position = Pos;
+	m_EnemyObj[num]->m_Visible = true;
 }
 
 void Player::Render()

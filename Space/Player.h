@@ -15,6 +15,8 @@ public:
 
 	Sprite* m_NowObj;
 
+	Sprite* m_EnemyObj[5];
+
 	TextMgr* m_RotationText;
 	LineMgr* m_MapLine;
 
@@ -45,5 +47,6 @@ public:
 	void Render();
 	void DrawMap();
 	void SpawnCannon(int num,Vec2 Pos,Vec2 WaterPos);
+	void SetEnemyPos(int num, Vec2 Pos);
 };
 
