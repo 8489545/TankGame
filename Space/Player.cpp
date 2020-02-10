@@ -62,8 +62,8 @@ Player::Player()
 	m_Power = 0;
 	m_MaxPower = 100;
 
-	m_Move = 99999;
-	m_MaxMove = 99999;
+	m_Move = 100;
+	m_MaxMove = 100;
 
 	m_Hp = 100;
 	m_MaxHp = 100;
