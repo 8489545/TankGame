@@ -38,6 +38,23 @@ void FCannon::SetEndPos()
 	m_BarrelEnd.y = m_Barrel->m_Position.y + (-m_Barrel->m_Size.x / 2) * sin(m_Barrel->m_Rotation) + (m_Barrel->m_Size.y / 2) * cos(m_Barrel->m_Rotation);
 }
 
+void FCannon::Shot()
+{
+	//m_Position.x = (m_Power * cos(m_StartingRotation)) * t + m_Pos.x;
+	//m_Position.y = (m_Power * sin(m_StartingRotation)) * t + GR / 2 * t * t + m_Pos.y;
+
+	// ( Player::Getinst()->NowPos.x - m_BarrelEnd.x) (1 / cos(rot)) / power = t;
+
+	/* | Player::Getinst()->NowPos.y = (m_Power * sin(rot))
+	* ( Player::Getinst()->NowPos.x - m_BarrelEnd.x) (1 / cos(rot))
+	/ power + 0.2 * 0.5f pow(( Player::Getinst()->NowPos.x - m_BarrelEnd.x) (1 / cos(rot)) / power ,2)+ m_BarrelEnd.y; */
+
+
+	//tq 
+	ObjMgr->AddObject(new CannonBall(rand() & 100, D3DXToRadian(rand() & 90), Vec2(m_BarrelEnd.x, m_BarrelEnd.y), Team), "CannonBall");
+	GameMgr::GetInst()->SetTurn(TURN::PLAYER);
+}
+
 void FCannon::Update(float deltaTime, float time)
 {
 	ObjMgr->CollisionCheak(this, "Tile");
@@ -54,16 +71,15 @@ void FCannon::Update(float deltaTime, float time)
 	{
 		m_Barrel->m_Rotation -= D3DXToRadian(1);
 	}
-	if (GameMgr::GetInst()->GetTurn() == TURN::ENEMY && Enemy::GetInst()->m_ControlTankNum == m_CannonNum)
+	if (GameMgr::GetInst()->GetTurn() == TURN::ENEMY && Enemy::GetInst()->m_ControlTankNum == m_CannonNum && !Camera::GetInst()->m_CannonBall)
 	{
 		Camera::GetInst()->Follow(this);
+		Shot();
 	}
 	else
 	{
 		Camera::GetInst()->Follow(nullptr);
 	}
-	//if (INPUT->GetKey(VK_SPACE) == KeyState::UP && m_isGround)
-		//ObjMgr->AddObject(new CannonBall(10, m_Barrel->m_Rotation, m_BarrelEnd, Team), "CannonBall");
 }
 
 void FCannon::Render()

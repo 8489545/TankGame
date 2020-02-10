@@ -158,7 +158,7 @@ void MRL::Shot()
 	{
 		Player::GetInst()->m_Power++;
 	}
-	if (INPUT->GetKey(VK_SPACE) == KeyState::UP)
+	if (INPUT->GetKey(VK_SPACE) == KeyState::UP && !Camera::GetInst()->m_CannonBall)
 	{
 		if (Player::GetInst()->m_Power > 0)
 		{

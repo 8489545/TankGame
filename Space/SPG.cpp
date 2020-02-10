@@ -156,7 +156,7 @@ void SPG::Shot()
 	{
 		Player::GetInst()->m_Power++;
 	}
-	if (INPUT->GetKey(VK_SPACE) == KeyState::UP)
+	if (INPUT->GetKey(VK_SPACE) == KeyState::UP && !Camera::GetInst()->m_CannonBall)
 	{
 		if(Player::GetInst()->m_Power > 0)
 			ObjMgr->AddObject(new CannonBall(Player::GetInst()->m_Power, m_Barrel->m_Rotation, m_BarrelEnd, Team), "CannonBall");

@@ -15,6 +15,7 @@ public:
 
 	void Gravity();
 	void SetEndPos();
+	void Shot();
 
 	void Update(float deltaTime, float time);
 	void Render();
