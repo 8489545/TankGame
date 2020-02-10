@@ -18,8 +18,15 @@ Beak::Beak()
 		Player::GetInst()->SpawnCannon(i, Vec2(m_GroundPos.x + (i * 100), m_GroundPos.y),
 			Vec2(m_WaterPos.x + (i * 100), m_WaterPos.y));
 	}
+	GameMgr::GetInst()->CreateEnemy();
 	GameMgr::GetInst()->SetTurn(TURN::PLAYER);
-	ObjMgr->AddObject(new FCannon(Vec2(500,300), TEAM::ENEMY, 1),"Enemy");
+
+	Enemy::GetInst()->AddCannon(0, Vec2(500, 500));
+	Enemy::GetInst()->AddCannon(1, Vec2(700, 500));
+	Enemy::GetInst()->AddCannon(2, Vec2(900, 500));
+	Enemy::GetInst()->AddCannon(3, Vec2(1100, 500));
+
+	Enemy::GetInst()->SpawnCannon();
 
 	TileMgr::GetInst()->InsertToPalette(L"FlatTile");
 	TileMgr::GetInst()->InsertToPalette(L"Slope30");

@@ -233,11 +233,11 @@
     <ClInclude Include="FCannon.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="TileMgr.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMgr.h">
+      <Filter>Game\Mgrs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
