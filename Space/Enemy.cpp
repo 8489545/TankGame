@@ -32,9 +32,6 @@ void Enemy::SpawnCannon()
 void Enemy::ChooseControlTank()
 {
 	m_ControlTankNum = rand() % m_CurrentTank;
-
-	if(m_Cannons.at(m_CurrentTank) == nullptr)
-		m_ControlTankNum = rand() % m_CurrentTank;
 }
 
 void Enemy::Update(float deltaTime, float time)
