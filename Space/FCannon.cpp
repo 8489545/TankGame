@@ -54,13 +54,13 @@ void FCannon::Update(float deltaTime, float time)
 	{
 		m_Barrel->m_Rotation -= D3DXToRadian(1);
 	}
-	if (GameMgr::GetInst()->GetTurn() == TURN::ENEMY)
+	if (GameMgr::GetInst()->GetTurn() == TURN::ENEMY && Enemy::GetInst()->m_ControlTankNum == m_CannonNum)
 	{
-
+		Camera::GetInst()->Follow(this);
 	}
 	else
 	{
-
+		Camera::GetInst()->Follow(nullptr);
 	}
 	//if (INPUT->GetKey(VK_SPACE) == KeyState::UP && m_isGround)
 		//ObjMgr->AddObject(new CannonBall(10, m_Barrel->m_Rotation, m_BarrelEnd, Team), "CannonBall");
