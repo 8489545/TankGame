@@ -138,6 +138,9 @@
     <ClCompile Include="Smoke.cpp">
       <Filter>Game\Object\Ball</Filter>
     </ClCompile>
+    <ClCompile Include="WinScene.cpp">
+      <Filter>Game\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="Smoke.h">
       <Filter>Game\Object\Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="WinScene.h">
+      <Filter>Game\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
