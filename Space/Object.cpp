@@ -22,6 +22,7 @@ Object::Object() :
 	, m_LinePos1(0.f,0.f)
 	, m_LinePos2(0.f,0.f)
 	, m_isWater(false)
+	, m_Hp(0)
 {
 	m_pDev->AddRef();
 	D3DXMatrixIdentity(&m_wMat);

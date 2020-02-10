@@ -13,6 +13,7 @@ FCannon::FCannon(Vec2 Pos, TEAM team, int num)
 	m_CannonNum = num;
 
 	m_Barrel = Sprite::Create(L"Painting/Object/Tank/EnemyBarrel.png");
+	m_Hp = 100;
 }
 
 FCannon::~FCannon()
@@ -58,6 +59,9 @@ void FCannon::Shot()
 void FCannon::Update(float deltaTime, float time)
 {
 	ObjMgr->CollisionCheak(this, "Tile");
+	ObjMgr->CollisionCheak(this, "CannonBall");
+	ObjMgr->CollisionCheak(this, "Missile");
+	ObjMgr->CollisionCheak(this, "Bomb");
 	Player::GetInst()->SetEnemyPos(m_CannonNum, m_Position);
 	Gravity();
 	SetEndPos();
@@ -93,5 +97,17 @@ void FCannon::OnCollision(Object* other)
 	if (other->m_Tag == "Tile")
 	{
 		m_isGround = true;
+	}
+	if (other->m_Tag == "CannonBall" && other->Team == TEAM::PLAYER)
+	{
+		m_Hp -= 30;
+	}
+	if (other->m_Tag == "Missile" && other->Team == TEAM::PLAYER)
+	{
+		m_Hp -= 20;
+	}
+	if (other->m_Tag == "Bomb" && other->Team == TEAM::PLAYER)
+	{
+		m_Hp -= 40;
 	}
 }

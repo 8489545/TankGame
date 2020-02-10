@@ -25,6 +25,12 @@
     <Filter Include="Main">
       <UniqueIdentifier>{c6383b1b-ea00-4070-81fb-02225c69a219}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Object\Unit">
+      <UniqueIdentifier>{29d58e02-15e4-4f67-8b4d-ffb95ca88881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Ball">
+      <UniqueIdentifier>{43781c89-1bdf-4b05-b7ec-d7f6642be634}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -96,41 +102,41 @@
     <ClCompile Include="CannonMgr.cpp">
       <Filter>Game\Mgrs</Filter>
     </ClCompile>
-    <ClCompile Include="SPG.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="TileMgr.cpp">
       <Filter>Game\Mgrs</Filter>
     </ClCompile>
-    <ClCompile Include="CannonBall.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
     <ClCompile Include="EffectMgr.cpp">
       <Filter>Game\Mgrs</Filter>
     </ClCompile>
-    <ClCompile Include="MRL.cpp">
+    <ClCompile Include="Enemy.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="BombingTank.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Smoke.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Bomb.cpp">
-      <Filter>Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="MTRAP.cpp">
-      <Filter>Game\Object</Filter>
+      <Filter>Game\Object\Unit</Filter>
     </ClCompile>
     <ClCompile Include="FCannon.cpp">
-      <Filter>Game\Object</Filter>
+      <Filter>Game\Object\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Game\Object</Filter>
+    <ClCompile Include="MRL.cpp">
+      <Filter>Game\Object\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="MTRAP.cpp">
+      <Filter>Game\Object\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="SPG.cpp">
+      <Filter>Game\Object\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Game\Object\Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="CannonBall.cpp">
+      <Filter>Game\Object\Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="Smoke.cpp">
+      <Filter>Game\Object\Ball</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,38 +212,38 @@
     <ClInclude Include="Player.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="CannonBall.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="SPG.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
     <ClInclude Include="EffectMgr.h">
       <Filter>Game\Mgrs</Filter>
-    </ClInclude>
-    <ClInclude Include="MRL.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="BombingTank.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Smoke.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Bomb.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="MTRAP.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="FCannon.h">
-      <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="TileMgr.h">
       <Filter>Game\Mgrs</Filter>
+    </ClInclude>
+    <ClInclude Include="BombingTank.h">
+      <Filter>Game\Object\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="FCannon.h">
+      <Filter>Game\Object\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="MRL.h">
+      <Filter>Game\Object\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="MTRAP.h">
+      <Filter>Game\Object\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="SPG.h">
+      <Filter>Game\Object\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Game\Object\Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonBall.h">
+      <Filter>Game\Object\Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="Smoke.h">
+      <Filter>Game\Object\Ball</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

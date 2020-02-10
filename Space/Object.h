@@ -27,6 +27,7 @@ public:
 	bool m_isWater;
 
 	int m_Layer;
+	int m_Hp;
 	std::string m_Tag;
 
 	Vec2 m_RotationCenter;

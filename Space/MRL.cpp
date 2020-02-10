@@ -35,6 +35,7 @@ MRL::MRL(Vec2 pos, TEAM team)
 	m_LockOn = false;
 
 	Team = team;
+	m_Hp = 190;
 }
 
 MRL::~MRL()
@@ -44,6 +45,7 @@ MRL::~MRL()
 void MRL::Update(float deltaTime, float Time)
 {
 	ObjMgr->CollisionCheak(this, "Tile");
+	ObjMgr->CollisionCheak(this, "CannonBall");
 
 	if (Team == TEAM::PLAYER)
 		LockOn();
@@ -51,8 +53,12 @@ void MRL::Update(float deltaTime, float Time)
 	Gravity();
 	SetObjectPos();
 
+
+
 	if (m_LockOn && GameMgr::GetInst()->GetTurn() == TURN::PLAYER)
 	{
+		Player::GetInst()->m_MaxHp = 190;
+		Player::GetInst()->m_Hp = m_Hp;
 		if (!Camera::GetInst()->m_CannonBall)
 			Camera::GetInst()->Follow(this);
 		else
@@ -86,6 +92,10 @@ void MRL::OnCollision(Object* other)
 	if (other->m_Tag == "Tile")
 	{
 		GroundCol(other);
+	}
+	if (other->m_Tag == "Tile" && other->Team == TEAM::ENEMY)
+	{
+		m_Hp -= 30;
 	}
 }
 
