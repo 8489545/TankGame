@@ -22,7 +22,7 @@ FCannon::~FCannon()
 void FCannon::Gravity()
 {
 	static float vy = 0;
-	vy += 9.8f * dt;
+	vy += 50.f * dt;
 
 	if (!m_isGround)
 	{
