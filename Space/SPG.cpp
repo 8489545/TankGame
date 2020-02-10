@@ -77,6 +77,7 @@ void SPG::Update(float deltaTime, float Time)
 	if (m_Hp <= 0)
 	{
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position), "Effect");
+		Player::GetInst()->Tanks -= 1;
 		ObjMgr->RemoveObject(this);
 	}
 	m_SPG->Update(deltaTime, Time);

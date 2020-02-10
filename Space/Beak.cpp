@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Beak.h"
 #include"FCannon.h"
+#include"LoseScene.h"
 
 Beak::Beak()
 {
@@ -59,6 +60,11 @@ void Beak::Update(float deltaTime, float Time)
 	{
 		ObjMgr->Release();
 		SceneDirector::GetInst()->ChangeScene(new WinScene());
+	}
+	if (Player::GetInst()->Tanks <= 0)
+	{
+		ObjMgr->Release();
+		SceneDirector::GetInst()->ChangeScene(new LoseScene());
 	}
 }
 

@@ -80,6 +80,7 @@ Player::Player()
 	m_MinRot->m_Layer = 2;
 
 	m_NowObj->m_Layer = 2;
+	Tanks = 3;
 }
 
 Player::~Player()

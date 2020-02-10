@@ -22,6 +22,8 @@ public:
 
 	std::vector<CANNON> m_Cannons;
 
+	int Tanks;
+
 	Player();
 	~Player();
 
