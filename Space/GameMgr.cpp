@@ -57,3 +57,13 @@ void GameMgr::ChangeTurn()
 		m_Turn = TURN::PLAYER;
 	}
 }
+
+void GameMgr::SetTurn(TURN turn)
+{
+	m_Turn = turn;
+}
+
+TURN GameMgr::GetTurn()
+{
+	return m_Turn;
+}

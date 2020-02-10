@@ -67,6 +67,10 @@ void CannonBall::OnCollision(Object* other)
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position),"Effect");
 			Camera::GetInst()->m_CannonBall = false;
 			Camera::GetInst()->Follow(nullptr);
+			if (Team == TEAM::PLAYER)
+				GameMgr::GetInst()->SetTurn(TURN::ENEMY);
+			else if (Team == TEAM::ENEMY)
+				GameMgr::GetInst()->SetTurn(TURN::PLAYER);
 			SetDestroy(true);
 		}
 	}

@@ -49,7 +49,7 @@ void BombingTank::Update(float deltaTime, float Time)
 	Gravity();
 	SetObjectPos();
 
-	if (m_LockOn)
+	if (m_LockOn && GameMgr::GetInst()->GetTurn() == TURN::PLAYER)
 	{
 		if (!Camera::GetInst()->m_CannonBall)
 			Camera::GetInst()->Follow(this);

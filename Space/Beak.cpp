@@ -18,6 +18,7 @@ Beak::Beak()
 		Player::GetInst()->SpawnCannon(i, Vec2(m_GroundPos.x + (i * 100), m_GroundPos.y),
 			Vec2(m_WaterPos.x + (i * 100), m_WaterPos.y));
 	}
+	GameMgr::GetInst()->SetTurn(TURN::PLAYER);
 	ObjMgr->AddObject(new FCannon(Vec2(500,300), TEAM::ENEMY, 1),"Enemy");
 
 	TileMgr::GetInst()->InsertToPalette(L"FlatTile");

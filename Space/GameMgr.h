@@ -33,5 +33,7 @@ public:
 	void ChangeNextStage();
 	void CreatePlayer();
 	void ChangeTurn();
+	void SetTurn(TURN turn);
+	TURN GetTurn();
 };
 
