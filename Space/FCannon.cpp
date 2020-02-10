@@ -84,6 +84,12 @@ void FCannon::Update(float deltaTime, float time)
 	{
 		Camera::GetInst()->Follow(nullptr);
 	}
+	if (m_Hp <= 0)
+	{
+		ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position), "Effect");
+		Enemy::GetInst()->m_Cannons.at(m_CannonNum) = nullptr;
+		ObjMgr->RemoveObject(this);
+	}
 }
 
 void FCannon::Render()

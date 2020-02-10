@@ -74,6 +74,11 @@ void SPG::Update(float deltaTime, float Time)
 		Camera::GetInst()->Follow(nullptr);
 		m_Active->m_Visible = false;
 	}
+	if (m_Hp <= 0)
+	{
+		ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position), "Effect");
+		ObjMgr->RemoveObject(this);
+	}
 	m_SPG->Update(deltaTime, Time);
 }
 
