@@ -46,6 +46,12 @@ void GameMgr::CreatePlayer()
 	m_isPlayer = true;
 }
 
+void GameMgr::CreateEnemy()
+{
+	Enemy::GetInst();
+	m_isEnemy = true;
+}
+
 void GameMgr::ChangeTurn()
 {
 	if (m_Turn == TURN::PLAYER)

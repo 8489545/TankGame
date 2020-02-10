@@ -33,6 +33,8 @@ void SceneDirector::Update(float deltaTime, float time)
 		m_CurrentScene->Update(deltaTime,time);
 	if (GameMgr::GetInst()->m_isPlayer)
 		Player::GetInst()->Update(deltaTime, time);
+	if (GameMgr::GetInst()->m_isEnemy)
+		Enemy::GetInst()->Update(deltaTime, time);
 
 }
 
@@ -43,4 +45,6 @@ void SceneDirector::Render()
 	ObjMgr->Render();
 	if (GameMgr::GetInst()->m_isPlayer)
 		Player::GetInst()->Render();
+	if (GameMgr::GetInst()->m_isEnemy)
+		Enemy::GetInst()->Render();
 }

@@ -129,6 +129,9 @@
     <ClCompile Include="FCannon.cpp">
       <Filter>Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -231,6 +234,9 @@
       <Filter>Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="TileMgr.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>

@@ -26,12 +26,14 @@ public:
 	STAGE m_Next;
 
 	bool m_isPlayer;
+	bool m_isEnemy;
 
 	TURN m_Turn;
 
 	void NextStage(STAGE stage);
 	void ChangeNextStage();
 	void CreatePlayer();
+	void CreateEnemy();
 	void ChangeTurn();
 	void SetTurn(TURN turn);
 	TURN GetTurn();
