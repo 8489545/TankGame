@@ -5,6 +5,7 @@
 Enemy::Enemy()
 {
 	m_CurrentTank = 0;
+	m_ControlTankNum = 0;
 }
 
 Enemy::~Enemy()
@@ -31,7 +32,9 @@ void Enemy::SpawnCannon()
 
 void Enemy::ChooseControlTank()
 {
-	m_ControlTankNum = rand() % m_CurrentTank;
+	m_ControlTankNum += 1;
+	if (m_ControlTankNum >= m_CurrentTank)
+		m_ControlTankNum = 0;
 }
 
 void Enemy::Update(float deltaTime, float time)

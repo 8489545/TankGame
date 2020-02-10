@@ -4,7 +4,7 @@ class WinScene : public Object
 	Sprite* m_BG;
 	Sprite* m_Button;
 public:
-	WinScene(STAGE stage);
+	WinScene();
 	~WinScene();
 
 	void Update(float deltaTime,float time);

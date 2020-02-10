@@ -44,6 +44,7 @@ inline void SafeDelete(T*& x);
 #include"GameMgr.h"
 #include"TileMgr.h"
 #include"EffectMgr.h"
+#include"WinScene.h"
 #include"Player.h"
 #include"Enemy.h"
 

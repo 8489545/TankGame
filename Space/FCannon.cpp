@@ -52,7 +52,10 @@ void FCannon::Shot()
 
 
 	//tq 
-	ObjMgr->AddObject(new CannonBall(rand() & 100, D3DXToRadian(rand() & 90), Vec2(m_BarrelEnd.x, m_BarrelEnd.y), Team), "CannonBall");
+
+	float rot = D3DXToRadian(rand() & 90);
+	m_Barrel->m_Rotation = D3DXToRadian(rand() & 90);
+	ObjMgr->AddObject(new CannonBall(rand() & 100, rot, Vec2(m_BarrelEnd.x, m_BarrelEnd.y), Team), "CannonBall");
 	GameMgr::GetInst()->SetTurn(TURN::PLAYER);
 }
 
@@ -66,15 +69,6 @@ void FCannon::Update(float deltaTime, float time)
 	Gravity();
 	SetEndPos();
 	m_Barrel->m_Position = Vec2(m_Position.x - 80, m_Position.y - 35);
-
-	if (INPUT->GetKey(VK_UP) == KeyState::PRESS && m_isGround)
-	{
-		m_Barrel->m_Rotation += D3DXToRadian(1);
-	}
-	if (INPUT->GetKey(VK_DOWN) == KeyState::PRESS && m_isGround)
-	{
-		m_Barrel->m_Rotation -= D3DXToRadian(1);
-	}
 	if (GameMgr::GetInst()->GetTurn() == TURN::ENEMY && Enemy::GetInst()->m_ControlTankNum == m_CannonNum && !Camera::GetInst()->m_CannonBall)
 	{
 		Camera::GetInst()->Follow(this);
@@ -84,10 +78,11 @@ void FCannon::Update(float deltaTime, float time)
 	{
 		Camera::GetInst()->Follow(nullptr);
 	}
-	if (m_Hp <= 0)
+	if (m_Hp <= 0 || (INPUT->GetKey('A') == KeyState::PRESS))
 	{
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position), "Effect");
 		Player::GetInst()->SetEnemyPos(m_CannonNum, Vec2(40000,40000));
+		Enemy::GetInst()->m_CurrentTank--;
 		ObjMgr->RemoveObject(this);
 	}
 }

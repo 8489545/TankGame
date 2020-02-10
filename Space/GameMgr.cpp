@@ -24,16 +24,6 @@ void GameMgr::ChangeNextStage()
 	case STAGE::BEAK:
 		SceneDirector::GetInst()->ChangeScene(new Beak());
 		break;
-	case STAGE::DAE:
-		break;
-	case STAGE::SO:
-		break;
-	case STAGE::U:
-		break;
-	case STAGE::YEON:
-		break;
-	case STAGE::NONE:
-		break;
 	default:
 		break;
 	}

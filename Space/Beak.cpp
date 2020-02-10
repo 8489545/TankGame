@@ -52,8 +52,14 @@ Beak::~Beak()
 
 void Beak::Update(float deltaTime, float Time)
 {
+	
 	m_BG->m_Position.x = Camera::GetInst()->m_X + 1920 / 2;
 	m_BG->m_Position.y = Camera::GetInst()->m_Y + 1080 / 2;
+	if (Enemy::GetInst()->m_CurrentTank <= 0)
+	{
+		ObjMgr->Release();
+		SceneDirector::GetInst()->ChangeScene(new WinScene());
+	}
 }
 
 void Beak::Render()

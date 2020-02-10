@@ -2,11 +2,6 @@
 enum class STAGE
 {
 	BEAK,
-	DAE,
-	SO,
-	U,
-	YEON,
-	NONE
 };
 
 enum class TURN
@@ -29,10 +24,6 @@ public:
 	bool m_isEnemy;
 
 	bool m_BeakClear;
-	bool m_DaeClear;
-	bool m_SoClear;
-	bool m_UClear;
-	bool m_YeonClear;
 
 	TURN m_Turn;
 
