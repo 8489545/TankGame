@@ -32,6 +32,8 @@ void CannonBall::Update(float deltaTime, float time)
 {
 	Camera::GetInst()->m_CannonBall = true;
 	ObjMgr->CollisionCheak(this, "Tile");
+	ObjMgr->CollisionCheak(this, "Tank");
+	ObjMgr->CollisionCheak(this, "Enemy");
 	Camera::GetInst()->Follow(this);
 	m_Position.x = (m_Power * cos(m_StartingRotation)) * t + m_Pos.x ;
 	m_Position.y = (m_Power * sin(m_StartingRotation)) * t + GR / 2 * t * t + m_Pos.y;
@@ -65,6 +67,36 @@ void CannonBall::OnCollision(Object* other)
 			|| CollisionMgr::GetInst()->LineToLineCollide(Vertex2, Vertex3, other->m_LinePos1, other->m_LinePos2))
 		{
 			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position),"Effect");
+			Camera::GetInst()->m_CannonBall = false;
+			Camera::GetInst()->Follow(nullptr);
+			if (Team == TEAM::PLAYER)
+				GameMgr::GetInst()->SetTurn(TURN::ENEMY);
+			else if (Team == TEAM::ENEMY)
+				GameMgr::GetInst()->SetTurn(TURN::PLAYER);
+			Enemy::GetInst()->ChooseControlTank();
+			SetDestroy(true);
+		}
+	}
+	if (other->m_Tag == "Tank")
+	{
+		if (Team == TEAM::ENEMY)
+		{
+			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position), "Effect");
+			Camera::GetInst()->m_CannonBall = false;
+			Camera::GetInst()->Follow(nullptr);
+			if (Team == TEAM::PLAYER)
+				GameMgr::GetInst()->SetTurn(TURN::ENEMY);
+			else if (Team == TEAM::ENEMY)
+				GameMgr::GetInst()->SetTurn(TURN::PLAYER);
+			Enemy::GetInst()->ChooseControlTank();
+			SetDestroy(true);
+		}
+	}
+	if (other->m_Tag == "Enemy")
+	{
+		if (Team == TEAM::PLAYER)
+		{
+			ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position), "Effect");
 			Camera::GetInst()->m_CannonBall = false;
 			Camera::GetInst()->Follow(nullptr);
 			if (Team == TEAM::PLAYER)
