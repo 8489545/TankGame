@@ -73,6 +73,7 @@ void CannonBall::OnCollision(Object* other)
 				GameMgr::GetInst()->SetTurn(TURN::ENEMY);
 			else if (Team == TEAM::ENEMY)
 				GameMgr::GetInst()->SetTurn(TURN::PLAYER);
+			Player::GetInst()->m_Move = 100;
 			Enemy::GetInst()->ChooseControlTank();
 			SetDestroy(true);
 		}
@@ -88,6 +89,7 @@ void CannonBall::OnCollision(Object* other)
 				GameMgr::GetInst()->SetTurn(TURN::ENEMY);
 			else if (Team == TEAM::ENEMY)
 				GameMgr::GetInst()->SetTurn(TURN::PLAYER);
+			Player::GetInst()->m_Move = 100;
 			Enemy::GetInst()->ChooseControlTank();
 			SetDestroy(true);
 		}

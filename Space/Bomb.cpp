@@ -50,6 +50,7 @@ void Bomb::OnCollision(Object* other)
 				GameMgr::GetInst()->SetTurn(TURN::ENEMY);
 			else if (Team == TEAM::ENEMY)
 				GameMgr::GetInst()->SetTurn(TURN::PLAYER);
+			Player::GetInst()->m_Move = 100;
 			SetDestroy(true);
 		}
 	}
