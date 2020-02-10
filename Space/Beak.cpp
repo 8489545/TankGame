@@ -21,10 +21,10 @@ Beak::Beak()
 	GameMgr::GetInst()->CreateEnemy();
 	GameMgr::GetInst()->SetTurn(TURN::PLAYER);
 
-	Enemy::GetInst()->AddCannon(0, Vec2(500, 500));
-	Enemy::GetInst()->AddCannon(1, Vec2(700, 500));
-	Enemy::GetInst()->AddCannon(2, Vec2(900, 500));
-	Enemy::GetInst()->AddCannon(3, Vec2(1100, 500));
+	Enemy::GetInst()->AddCannon(0, Vec2(7000, 500));
+	Enemy::GetInst()->AddCannon(1, Vec2(7800, 0));
+	Enemy::GetInst()->AddCannon(2, Vec2(8100, 0));
+	Enemy::GetInst()->AddCannon(3, Vec2(8600, 0));
 
 	Enemy::GetInst()->SpawnCannon();
 
