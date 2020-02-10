@@ -87,6 +87,7 @@ void FCannon::Update(float deltaTime, float time)
 	if (m_Hp <= 0)
 	{
 		ObjMgr->AddObject(new EffectMgr(L"Painting/Effect/explosion/", 1, 10, m_Position), "Effect");
+		Player::GetInst()->SetEnemyPos(m_CannonNum, Vec2(40000,40000));
 		ObjMgr->RemoveObject(this);
 	}
 }

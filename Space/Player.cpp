@@ -96,7 +96,6 @@ void Player::Update(float deltaTime, float time)
 	m_BarrelRot->m_Rotation = m_Barrel;
 	m_MaxRot->m_Rotation = m_Max;
 	m_MinRot->m_Rotation = m_Min;
-
 }
 
 void Player::DrawMap()
